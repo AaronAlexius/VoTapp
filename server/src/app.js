@@ -50,9 +50,10 @@ server.listen(configuration.web.port, configuration.web.host, () => {
 });
 
 io.on("connection", (socket) => {
+  socket.join("join-room")
   socket.on("send-message", (message) => {
-    socket.broadcast.emit("receive-message", message)
-    // add .to(message.room) after room set up is complete
+    console.log(message)
+    socket.broadcast.to("join-room").emit("receive-message", message)
   })
 })
 
