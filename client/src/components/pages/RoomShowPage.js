@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { io } from "socket.io-client";
-import TextMessage from '../elements/TextMessage';
 
 const RoomShowPage = (props) => {
   const defaultState = { text: "" }
@@ -20,7 +19,7 @@ const RoomShowPage = (props) => {
       [event.currentTarget.name]: event.currentTarget.value,
     })
   }
-  
+
   const handleOnSubmit = event => {
     event.preventDefault()
     socket.emit("send-message", message )
