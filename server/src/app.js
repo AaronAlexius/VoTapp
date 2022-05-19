@@ -7,6 +7,8 @@ import "./boot.js";
 import configuration from "./config.js";
 import addMiddlewares from "./middlewares/addMiddlewares.js";
 import rootRouter from "./routes/rootRouter.js";
+import { Server } from "socket.io";
+import http from "http";
 
 const __filename = fileURLToPath(import.meta.url);
 
@@ -35,7 +37,24 @@ app.use(
 app.use(bodyParser.json());
 addMiddlewares(app);
 app.use(rootRouter);
-app.listen(configuration.web.port, configuration.web.host, () => {
-  console.log("Server is listening...");
+
+const server = http.createServer(app)
+const io = new Server(server, {
+  cors: {
+    origin: "http://localhost:3000",
+  },
 });
+
+server.listen(configuration.web.port, configuration.web.host, () => {
+  console.log(`Server is listening on port ${configuration.web.port}`);
+});
+
+io.on("connection", (socket) => {
+  socket.join("join-room")
+  socket.on("send-message", (message) => {
+    console.log(message)
+    socket.broadcast.to("join-room").emit("receive-message", message)
+  })
+})
+
 export default app;
