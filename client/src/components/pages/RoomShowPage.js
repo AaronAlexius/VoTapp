@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { io } from "socket.io-client";
+import TextMessage from '../elements/TextMessage';
 
 const RoomShowPage = (props) => {
   const defaultState = { text: "" }
   const [discussion, setDiscussion] = useState([])
   const [message, setMessage] = useState(defaultState)
   const [socket] = useState(io("http://localhost:3000"))
-
-  
 
   useEffect(() => {
     socket.on("receive-message", (message)=> {
@@ -21,6 +20,7 @@ const RoomShowPage = (props) => {
       [event.currentTarget.name]: event.currentTarget.value,
     })
   }
+  
   const handleOnSubmit = event => {
     event.preventDefault()
     socket.emit("send-message", message )
