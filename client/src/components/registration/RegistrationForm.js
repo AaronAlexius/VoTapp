@@ -11,7 +11,6 @@ const RegistrationForm = () => {
   });
 
   const [errors, setErrors] = useState({});
-
   const [shouldRedirect, setShouldRedirect] = useState(false);
 
   const validateInput = (payload) => {
