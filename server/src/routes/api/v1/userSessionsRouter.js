@@ -12,6 +12,7 @@ sessionRouter.post("/", (req, res, next) => {
 
     if (user) {
       return req.login(user, () => {
+        console.log("Error in post")
         return res.status(201).json(user);
       });
     }
@@ -24,6 +25,7 @@ sessionRouter.get("/current", async (req, res) => {
   if (req.user) {
     res.status(200).json(req.user);
   } else {
+    console.log("error in get")
     res.status(401).json(undefined);
   }
 });

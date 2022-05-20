@@ -5,19 +5,23 @@ class UserSeeder {
     const userData = [
       {
         email: "baru@email.com",
+        userName: "traitor",
         password: "cormorant"
       },
       {
         email: "wintermute@email.com",
+        userName: "HAL",
         password: "program"
       },
       {
         email: "rocinante@email.com",
+        userName: "Roci",
         password: "legit"
       },
       {
         email: "troika@email.com",
-        password: "ender"
+        userName: "Ender",
+        password: "fdm"
       }
     ]
 

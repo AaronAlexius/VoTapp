@@ -15,16 +15,19 @@ const TopBar = ({ user }) => {
   ];
 
   const authenticatedListItems = [
+    <li key="user-name">
+      {user ? `Welcome to VoTapp, ${user.userName}` : ""}
+    </li>,
     <li key="sign-out">
       <SignOutButton />
-    </li>,
+    </li>
   ];
 
   return (
     <div className="top-bar">
       <div className="top-bar-left">
         <ul className="menu">
-          <li className="menu-text">App</li>
+          <li className="menu-text">VoTapp</li>
           <li>
             <Link to="/">Home</Link>
           </li>
