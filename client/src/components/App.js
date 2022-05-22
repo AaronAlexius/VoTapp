@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { hot } from "react-hot-loader/root";
-
 import getCurrentUser from "../services/getCurrentUser";
 import "../assets/scss/main.scss";
 import RegistrationForm from "./registration/RegistrationForm";
 import SignInForm from "./authentication/SignInForm";
 import TopBar from "./layout/TopBar";
+import HomeShowPage from "./pages/HomeShowPage";
 import RoomShowPage from "./pages/RoomShowPage";
 import GenerateRoom from "./pages/GenerateRoom";
 
@@ -31,7 +31,7 @@ const App = (props) => {
       <Switch>
         <Route exact path="/users/new" component={RegistrationForm} />
         <Route exact path="/user-sessions/new" component={SignInForm} />
-        <Route exact path="/" component={RoomShowPage} />
+        <Route exact path="/" component={HomeShowPage} />
         <Route exact path="/rooms/new" component={GenerateRoom} />
       </Switch>
     </Router>

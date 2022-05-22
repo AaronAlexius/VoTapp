@@ -1,65 +1,40 @@
 import React, { useState } from "react";
+import NewQuestionForm from "../elements/NewQuestionForm.js";
+import ErrorList from "../layout/ErrorList.js";
+import translateServerErrors from "../../services/translateServerErrors.js";
 
 const GenerateRoom = props => {
+  const [errors, setErrors] = useState([])
 
-  const defaultState = { image: "", question: "", boxes: 1, }
-  const [voteTopic, setVoteTopic] = useState(defaultState)
-  
-  const handleInputChange = event => {
-    setVoteTopic({
-      ...voteTopic,
-      [event.currentTarget.name]: event.currentTarget.value,
-    })
+  const postTopic = async (newTopicData) => {
+    try {
+      const response = await fetch(`/api/v1/rooms/new`, {
+        method: 'POST',
+        headers: new Headers({
+          'Content-Type': 'application/json'
+        }),
+        body: JSON.stringify(newTopicData)
+      })
+      if (!response.ok) {
+        if (response.status === 422) {
+          const body = await response.json()
+          const newErrors = translateServerErrors(body.errors)
+          return setErrors(newErrors)
+        } else {
+          const errorMessage = `${response.status} (${response.statusText})`
+          const error = new Error(errorMessage)
+          throw error
+        }
+      }   
+    } catch (error) {
+      console.error(`Error in fetch:${error.message}`)
+    }
   }
-
-  const handleOnSubmit = event => {
-    event.preventDefault()
-    clearField()
-  }
-
-  const clearField = event => {
-    setVoteTopic(defaultState)
-  } 
 
   return (
-    <div className="chatContainer">
-      <h1 className="header">Create your query below!</h1>
-      <div className="formContainer">
-        <form onSubmit={handleOnSubmit}>
-          <label 
-            htmlFor="mapOfImages"
-            className="mapOfImages"
-            name="image">Choose your image!</label>
-          <label htmlFor="question">Create a question!
-            <input
-              id="question"
-              type="text"
-              className=""
-              name="question"
-              value={voteTopic.question}
-              onChange={handleInputChange}
-              />
-          </label>
-          <label htmlFor="boxes">Select the number of text boxes needed!
-            <select 
-              id="boxes"
-              type="number"
-              name="boxes"
-              value={voteTopic.boxes}
-              onChange={handleInputChange}
-              >
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-            </select>
-          </label>
-          <button 
-              type="submit" 
-              id="send-button" 
-              className="cell small-2">Create Room
-          </button>
-        </form>
-      </div>
+    <div>
+      <ErrorList errors={errors} />
+      <NewQuestionForm postTopic={postTopic} />
     </div>
   )
 }

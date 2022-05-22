@@ -5,23 +5,30 @@ import config from "../../config";
 const RegistrationForm = () => {
   const [userPayload, setUserPayload] = useState({
     email: "",
+    userName: "",
     password: "",
     passwordConfirmation: "",
   });
 
   const [errors, setErrors] = useState({});
-
   const [shouldRedirect, setShouldRedirect] = useState(false);
 
   const validateInput = (payload) => {
     setErrors({});
-    const { email, password, passwordConfirmation } = payload;
-    const emailRegexp = config.validation.email.regexp;
+    const { email, userName, password, passwordConfirmation } = payload;
+    const emailRegexp = config.validation.email.regexp.emailRegex;
     let newErrors = {};
     if (!email.match(emailRegexp)) {
       newErrors = {
         ...newErrors,
         email: "is invalid",
+      };
+    }
+
+    if (!userName.length > 2 || !userName.length < 13) {
+      newErrors = {
+        ...newErrors,
+        userName: "is invalid",
       };
     }
 
@@ -45,7 +52,6 @@ const RegistrationForm = () => {
         };
       }
     }
-
     setErrors(newErrors);
   };
 
@@ -94,6 +100,18 @@ const RegistrationForm = () => {
             Email
             <input type="text" name="email" value={userPayload.email} onChange={onInputChange} />
             <FormError error={errors.email} />
+          </label>
+        </div>
+        <div>
+        <label>
+            User Name
+            <input
+              type="text"
+              name="userName"
+              value={userPayload.userName}
+              onChange={onInputChange}
+            />
+            <FormError error={errors.password} />
           </label>
         </div>
         <div>
