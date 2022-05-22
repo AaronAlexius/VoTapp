@@ -10,7 +10,7 @@ class UserSeeder {
       },
       {
         email: "wintermute@email.com",
-        userName: "HAL",
+        userName: "wintermute",
         password: "program"
       },
       {
