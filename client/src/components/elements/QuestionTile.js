@@ -1,11 +1,11 @@
 import React from "react";
 
 const QuestionTile = (props) => {
-  const { topic } = props.question
+  const { key, topic } = props
 
   return (
     <div>
-      <h4>{topic}</h4>
+      <li key={key}>{topic}</li>
     </div>
   )
 }

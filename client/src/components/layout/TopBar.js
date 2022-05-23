@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import SignOutButton from "../authentication/SignOutButton";
 
 const TopBar = ({ user }) => {
-  const { id, userName } = user
+  // const { id, userName } = user
   
   const unauthenticatedListItems = [
     <li key="sign-in">
@@ -21,11 +21,11 @@ const TopBar = ({ user }) => {
       <SignOutButton />
     </li>
   ];
-debugger
+
   const userNavigation = [
-    <Link to={`/users/${id}`} key="user-name">
-      {user ? `Welcome to VoTapp, ${userName}` : ""}
-    </Link>
+    <li key="user-name">
+      {user ? `Welcome to VoTapp, ${user.userName}` : ""}
+    </li>
   ]
 
   return (

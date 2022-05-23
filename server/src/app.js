@@ -7,8 +7,6 @@ import "./boot.js";
 import configuration from "./config.js";
 import addMiddlewares from "./middlewares/addMiddlewares.js";
 import rootRouter from "./routes/rootRouter.js";
-import { Server } from "socket.io";
-import http from "http";
 
 const __filename = fileURLToPath(import.meta.url);
 
