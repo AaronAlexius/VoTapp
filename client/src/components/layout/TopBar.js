@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import SignOutButton from "../authentication/SignOutButton";
 
 const TopBar = ({ user }) => {
+  const { id, userName } = user
+  
   const unauthenticatedListItems = [
     <li key="sign-in">
       <Link to="/user-sessions/new">Sign In</Link>
@@ -15,13 +17,16 @@ const TopBar = ({ user }) => {
   ];
 
   const authenticatedListItems = [
-    <li key="user-name">
-      {user ? `Welcome to VoTapp, ${user.userName}` : ""}
-    </li>,
     <li key="sign-out">
       <SignOutButton />
     </li>
   ];
+debugger
+  const userNavigation = [
+    <Link to={`/users/${id}`} key="user-name">
+      {user ? `Welcome to VoTapp, ${userName}` : ""}
+    </Link>
+  ]
 
   return (
     <div className="top-bar">
@@ -30,6 +35,9 @@ const TopBar = ({ user }) => {
           <li className="menu-text">VoTapp</li>
           <li>
             <Link to="/">Home</Link>
+          </li>
+          <li >
+            <ul>{user ? userNavigation : ""}</ul>
           </li>
         </ul>
       </div>

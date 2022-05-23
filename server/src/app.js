@@ -38,23 +38,23 @@ app.use(bodyParser.json());
 addMiddlewares(app);
 app.use(rootRouter);
 
-const server = http.createServer(app)
-const io = new Server(server, {
-  cors: {
-    origin: "http://localhost:3000",
-  },
-});
+// const server = http.createServer(app)
+// const io = new Server(server, {
+//   cors: {
+//     origin: "http://localhost:3000",
+//   },
+// });
 
-server.listen(configuration.web.port, configuration.web.host, () => {
+app.listen(configuration.web.port, configuration.web.host, () => {
   console.log(`Server is listening on port ${configuration.web.port}`);
 });
 
-io.on("connection", (socket) => {
-  socket.join("join-room")
-  socket.on("send-message", (message) => {
-    console.log(message)
-    socket.broadcast.to("join-room").emit("receive-message", message)
-  })
-})
+// io.on("connection", (socket) => {
+//   socket.join("join-room")
+//   socket.on("send-message", (message) => {
+//     console.log(message)
+//     socket.broadcast.to("join-room").emit("receive-message", message)
+//   })
+// })
 
 export default app;

@@ -1,0 +1,17 @@
+credential.helper=osxkeychain
+init.defaultbranch=main
+user.name=Aaron Alexius
+user.email=aaronalexius@gmail.com
+core.pager=cat
+core.editor=code --wait
+core.repositoryformatversion=0
+core.filemode=true
+core.bare=false
+core.logallrefupdates=true
+core.ignorecase=true
+core.precomposeunicode=true
+remote.origin.url=https://github.com/AaronAlexius/VoTapp.git
+remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*
+branch.main.remote=origin
+branch.main.merge=refs/heads/main
+pull.rebase=false

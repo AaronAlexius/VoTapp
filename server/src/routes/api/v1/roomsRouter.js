@@ -4,6 +4,7 @@ const { ValidationError } = objection;
 import { Question } from "../../../models/index.js"
 import QuestionSerializer from "../../../serializers/QuestionSerializer.js";
 import cleanUserInput from "../../../services/cleanUserInput.js"
+import { User } from "../../../models/index.js"
 
 const roomsRouter = new express.Router()
 
@@ -35,5 +36,18 @@ roomsRouter.post("/new", async (req, res) => {
     return res.status(500).json({ errors: error })
   }
 })
+
+// roomsRouter.get("/:id", async (req, res) => {
+//   const userId = req.params.id
+//   debugger
+//   try {
+//     const user = await User.query().findById(userId)
+//     const userQuestions = await user.$relatedQuery("questions")
+//     user.questions = userQuestions
+//     return res.status(200).json({ user })
+//   } catch (err) {
+//     return res.status(500).json({ errors: err})
+//   }
+// })
 
 export default roomsRouter
