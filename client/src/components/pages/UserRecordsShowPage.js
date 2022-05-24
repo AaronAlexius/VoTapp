@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react";
 import QuestionTile from "../elements/QuestionTile.js";
-import { withRouter } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const UserRecordsShowPage = (props) => {
   const [questions, setQuestions] = useState([])
-  const userId = props.match.params.id     
+
+  const { id } = useParams()
   const userName = props.user.userName
   
   const getQuestions = async () => {
     try {
-      const response = await fetch(`/api/v1/users/${userId}`)
+      const response = await fetch(`/api/v1/users/${id}`)
       if (!response.ok) {
         const errorMessage = `${response.status} (${response.statusText})`
         const error = new Error(errorMessage)
@@ -45,4 +46,4 @@ const UserRecordsShowPage = (props) => {
   )
 }
 
-export default withRouter(UserRecordsShowPage)
+export default UserRecordsShowPage

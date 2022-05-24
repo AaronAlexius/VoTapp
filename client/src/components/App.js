@@ -12,7 +12,8 @@ import GenerateRoom from "./pages/GenerateRoom";
 import UserRecordsShowPage from "./pages/UserRecordsShowPage";
 
 const App = (props) => {
-  const [currentUser, setCurrentUser] = useState(undefined);
+  const [currentUser, setCurrentUser] = useState({});
+
   const fetchCurrentUser = async () => {
     try {
       const user = await getCurrentUser()
