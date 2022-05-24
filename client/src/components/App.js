@@ -33,10 +33,10 @@ const App = (props) => {
         <Route exact path="/users/new" component={RegistrationForm} />
         <Route exact path="/user-sessions/new" component={SignInForm} />
         <Route exact path="/">
-          <HomeShowPage currentUser={currentUser} />
+          <HomeShowPage user={currentUser} />
         </Route>
         <Route exact path="/users/:id" >
-          <UserRecordsShowPage />
+          <UserRecordsShowPage user={currentUser}/>
         </Route>
         <Route exact path="/rooms/new" component={GenerateRoom} />
       </Switch>
