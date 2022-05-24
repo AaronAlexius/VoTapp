@@ -13,19 +13,19 @@ class Question extends Model {
         topic: { type: "string" },
         boxes: { type: ["integer", "string"]},
         image: { type: "string" },
-        userId: { type: "string" }
+        userId: { type: ["integer", "string"] }
       }
     }
   }
 
-  static get relationalMappings() {
+  static get relationMappings() {
     const { User } = require("./index.js")
     return {
       user: {
         relation: Model.BelongsToOneRelation,
         modelClass: User,
         join: {
-          from: "topics.id",
+          from: "questions.userId",
           to: "users.id"
         }
       }

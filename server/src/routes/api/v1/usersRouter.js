@@ -1,6 +1,7 @@
 import express from "express";
 import passport from "passport";
 import { User } from "../../../models/index.js";
+import UserSerializer from "../../../serializers/UserSerializer.js";
 
 const usersRouter = new express.Router();
 
@@ -16,5 +17,16 @@ usersRouter.post("/", async (req, res) => {
     return res.status(422).json({ errors: error });
   }
 });
+
+usersRouter.get("/:id", async (req, res) => {
+  const userId = req.params.id
+  try {
+    const user = await User.query().findById(userId)
+    const userQuestions = await UserSerializer.getDetail(user)
+    return res.status(200).json({ user: userQuestions })
+  } catch (err) {
+    return res.status(500).json({ errors: err})
+  }
+})
 
 export default usersRouter;

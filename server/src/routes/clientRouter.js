@@ -7,6 +7,7 @@ const clientRoutes = [
   "/", 
   "/user-sessions/new", 
   "/users/new",
+  "/users/:id",
   "/rooms", 
   "/rooms/new"];
 

@@ -47,13 +47,13 @@ const SignInForm = () => {
           throw(error)
         }
         const userData = await response.json()
-        setShouldRedirect(true)
+        redirectHandler(userData)
       }
     } catch(err) {
       console.error(`Error in fetch: ${err.message}`)
     }
   }
-
+  
   const onInputChange = (event) => {
     setUserPayload({
       ...userPayload,
@@ -61,8 +61,16 @@ const SignInForm = () => {
     });
   };
 
-  if (shouldRedirect) {
-    location.href = "/";
+  const redirectHandler = (userData) => {
+    const userId = userData.id
+    location.href = getDynamicURL(userId)
+    // setShouldRedirect(true)
+  }
+
+  const getDynamicURL = (id) => {
+    let URL = "/users/"
+    URL += id
+    return URL
   }
 
   return (

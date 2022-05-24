@@ -9,9 +9,11 @@ import TopBar from "./layout/TopBar";
 import HomeShowPage from "./pages/HomeShowPage";
 import RoomShowPage from "./pages/RoomShowPage";
 import GenerateRoom from "./pages/GenerateRoom";
+import UserRecordsShowPage from "./pages/UserRecordsShowPage";
 
 const App = (props) => {
-  const [currentUser, setCurrentUser] = useState(undefined);
+  const [currentUser, setCurrentUser] = useState({});
+
   const fetchCurrentUser = async () => {
     try {
       const user = await getCurrentUser()
@@ -31,7 +33,12 @@ const App = (props) => {
       <Switch>
         <Route exact path="/users/new" component={RegistrationForm} />
         <Route exact path="/user-sessions/new" component={SignInForm} />
-        <Route exact path="/" component={HomeShowPage} />
+        <Route exact path="/">
+          <HomeShowPage user={currentUser} />
+        </Route>
+        <Route exact path="/users/:id" >
+          <UserRecordsShowPage user={currentUser}/>
+        </Route>
         <Route exact path="/rooms/new" component={GenerateRoom} />
       </Switch>
     </Router>

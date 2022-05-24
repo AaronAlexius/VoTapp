@@ -19,7 +19,6 @@
   "engines": {
     "node": "^14.19"
   },
-  "dependencies": {
-    "socket.io": "^4.5.1"
-  }
+  "dependencies": {},
+  "version": "v1.22.10"
 }
