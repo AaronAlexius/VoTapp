@@ -5,16 +5,17 @@ import { withRouter } from "react-router-dom";
 
 const HomeShowPage = ({ user }) => {
   return (
-    <div>
+    <div className="grid-y">
       <h1>Welcome to VoTapp!</h1>
       {user ? (<>
-        <Link id="past-questions" to={`/users/${user.id}`} >
+        <Link className="callout primary" id="past-questions" to={`/users/${user.id}`} >
           Check out your past questions, {user.userName}
         </Link>
         <br/>
-        <Link id="Create New Question Room" to="/rooms/new">
+        <Link className="callout secondary" id="Create New Question Room" to="/rooms/new">
           Create a new question!
         </Link>
+        <br/>
       </>) : (<h1>Sign in or sign up to create your own votes!</h1>)}
     </div>
   )

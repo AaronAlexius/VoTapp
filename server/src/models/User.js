@@ -27,7 +27,6 @@ class User extends uniqueFunc(Model) {
     return {
       type: "object",
       required: ["email", "userName"],
-
       properties: {
         email: { type: "string", pattern: "^\\S+@\\S+\\.\\S+$" },
         cryptedPassword: { type: "string" },
@@ -38,7 +37,6 @@ class User extends uniqueFunc(Model) {
 
   static get relationMappings() {
     const { Question } = require("./index.js")
-
     return {
       questions: {
         relation: Model.HasManyRelation,

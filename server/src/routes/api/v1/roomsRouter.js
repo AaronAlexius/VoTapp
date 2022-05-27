@@ -24,10 +24,10 @@ roomsRouter.post("/new", async (req, res) => {
   const userId = req.user.id
   const { body } = req
   const formInput = cleanUserInput(body)
-  const { topic, boxes, image } = formInput
+  const { topic } = formInput
 
   try {
-    const question = await Question.query().insertAndFetch({ topic, boxes, image, userId })
+    const question = await Question.query().insertAndFetch({ topic, userId })
     return res.status(201).json({ question: question })
   } catch (error) {
     if (error instanceof ValidationError) {
@@ -37,17 +37,14 @@ roomsRouter.post("/new", async (req, res) => {
   }
 })
 
-// roomsRouter.get("/:id", async (req, res) => {
-//   const userId = req.params.id
-//   debugger
-//   try {
-//     const user = await User.query().findById(userId)
-//     const userQuestions = await user.$relatedQuery("questions")
-//     user.questions = userQuestions
-//     return res.status(200).json({ user })
-//   } catch (err) {
-//     return res.status(500).json({ errors: err})
-//   }
-// })
+roomsRouter.get("/:id", async (req, res) => {
+  const topicId = req.params.id
+  try {
+    const topic = await Question.query().findById(topicId)
+    return res.status(200).json({ topic: topic })
+  } catch (err) {
+    return res.status(500).json({ errors: err})
+  }
+})
 
 export default roomsRouter

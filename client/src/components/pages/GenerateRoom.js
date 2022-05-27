@@ -2,9 +2,12 @@ import React, { useState } from "react";
 import NewQuestionForm from "../elements/NewQuestionForm.js";
 import ErrorList from "../layout/ErrorList.js";
 import translateServerErrors from "../../services/translateServerErrors.js";
+import { Redirect, Link } from "react-router-dom";
 
 const GenerateRoom = props => {
   const [errors, setErrors] = useState([])
+  const [shouldRedirect, setShouldRedirect] = useState(false)
+  const [newRoomId, setNewRoomId] = useState()
 
   const postTopic = async (newTopicData) => {
     try {
@@ -25,16 +28,35 @@ const GenerateRoom = props => {
           const error = new Error(errorMessage)
           throw error
         }
-      }   
+      } else {
+      const body = await response.json()
+      const roomId = body.question.id
+      setNewRoomId(roomId)
+      setShouldRedirect(true)
+      }
     } catch (error) {
       console.error(`Error in fetch:${error.message}`)
     }
   }
 
+  const handleRedirect = () => {
+    console.log("button works")
+    console.log(newRoomId)
+    console.log(shouldRedirect)
+    if (shouldRedirect) {
+      return <Redirect to="/home" />
+    }
+  }
+  
   return (
     <div>
       <ErrorList errors={errors} />
       <NewQuestionForm postTopic={postTopic} />
+      {shouldRedirect ? (<>
+        <Link to={`/rooms/${newRoomId}`} >
+          Check out your new room.  
+        </Link>
+      </>) : (<h3>Add a new topic to head to your new room!</h3>)}
     </div>
   )
 }

@@ -17,8 +17,6 @@ exports.up = async (knex) => {
   return knex.schema.createTable(tableName, (t) => {
     t.bigIncrements("id")
     t.string("topic").notNullable()
-    t.integer("boxes").notNullable()
-    t.string("image")
     t.bigInteger("userId")
       .notNullable()
       .index()

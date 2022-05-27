@@ -8,11 +8,9 @@ class Question extends Model {
   static get jsonSchema() {
     return {
       type: "object",
-      required: ["topic", "boxes"],
+      required: ["topic"],
       properties: {
         topic: { type: "string" },
-        boxes: { type: ["integer", "string"]},
-        image: { type: "string" },
         userId: { type: ["integer", "string"] }
       }
     }

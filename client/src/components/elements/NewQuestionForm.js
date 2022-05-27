@@ -2,7 +2,7 @@ import React, { useState } from "react"
 
 const NewQuestionForm = (props) => {
   const { postTopic } = props
-  const defaultState = { image: "", topic: "", boxes: 1, }
+  const defaultState = { topic: "Write your topic here" }
   const [voteTopic, setVoteTopic] = useState(defaultState)
   
   const handleInputChange = event => {
@@ -23,15 +23,13 @@ const NewQuestionForm = (props) => {
   } 
 
   return (
-    <div className="chatContainer">
-      <h1 className="header">Create your query below!</h1>
+    <div className="largeContainer">
+      <div className="centerHeaders">
+        <h1 className="header">Create your topic below!</h1>
+      </div>
       <div className="formContainer">
         <form onSubmit={handleOnSubmit}>
-          <label 
-            htmlFor="mapOfImages"
-            className="mapOfImages"
-            name="image">Choose your image!</label>
-          <label htmlFor="topic">Create a topic!
+          <label htmlFor="topic" className="header callout">Create a topic!
             <input
               id="topic"
               type="text"
@@ -41,24 +39,11 @@ const NewQuestionForm = (props) => {
               onChange={handleInputChange}
               />
           </label>
-          <label htmlFor="boxes">Select the number of text boxes needed!
-            <select 
-              id="boxes"
-              type="number"
-              name="boxes"
-              value={voteTopic.boxes}
-              onChange={handleInputChange}
-              >
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-            </select>
-          </label>
-          <button 
-          type="submit" 
-          id="send-button" 
-          className="cell small-2">Save Topic
-      </button>
+            <button 
+              type="submit" 
+              id="send-button" 
+              className="cell callout secondary small-1">Save Topic
+            </button>
         </form>
       </div>
     </div>
