@@ -49,14 +49,17 @@ const GenerateRoom = props => {
   }
   
   return (
-    <div>
+    <div className="grid-container">
       <ErrorList errors={errors} />
-      <NewQuestionForm postTopic={postTopic} />
-      {shouldRedirect ? (<>
-        <Link to={`/rooms/${newRoomId}`} >
-          Check out your new room.  
-        </Link>
-      </>) : (<h3>Add a new topic to head to your new room!</h3>)}
+      <NewQuestionForm postTopic={postTopic} shouldRedirect={shouldRedirect}/>
+      <div className="text-center">
+        {shouldRedirect ? (<>
+          <Link className="cell shrink small-6 callout primary" to={`/rooms/${newRoomId}`} >
+            Check out your new room.  
+          </Link>
+          </>) 
+        : (<h4>Add a new topic to head to your new room!</h4>)}
+      </div>
     </div>
   )
 }

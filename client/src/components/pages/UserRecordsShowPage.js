@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import QuestionTile from "../elements/QuestionTile.js";
 import { useParams } from "react-router-dom";
+import BreadCrumbBar from "../elements/BreadCrumbBar.js";
 
 const UserRecordsShowPage = (props) => {
   const [questions, setQuestions] = useState([])
@@ -39,9 +40,11 @@ const UserRecordsShowPage = (props) => {
   }) 
 
   return (
-    <div>
+    <div className="grid-container">
       <h1>{userName} here are you old questions!</h1>
-      <div>{questionTiles}</div>
+      <div className="grid-x grid-margin-x">
+        {questionTiles}
+      </div>
     </div>
   )
 }

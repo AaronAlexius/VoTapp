@@ -1,22 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
+import BreadCrumbBar from "../elements/BreadCrumbBar.js";
 
 
 const HomeShowPage = ({ user }) => {
+
+
   return (
-    <div className="grid-y">
+    <div className="grid-container">
       <h1>Welcome to VoTapp!</h1>
-      {user ? (<>
-        <Link className="callout primary" id="past-questions" to={`/users/${user.id}`} >
-          Check out your past questions, {user.userName}
-        </Link>
-        <br/>
-        <Link className="callout secondary" id="Create New Question Room" to="/rooms/new">
-          Create a new question!
-        </Link>
-        <br/>
-      </>) : (<h1>Sign in or sign up to create your own votes!</h1>)}
     </div>
   )
 }

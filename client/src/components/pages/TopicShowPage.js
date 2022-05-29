@@ -55,12 +55,15 @@ const TopicShowPage = (props) => {
   })
 
   return (
-    <div className="largeContainer">
+    <div className="grid-container largeContainer">
       <div className="centerHeaders">
         <h2 className="header">Make a comment on this topic!</h2>
-        <h2 className="header callout primary">{currentTopic.topic}</h2>
+        <h2 className="header callout text-center primary">{currentTopic.topic}</h2>
       </div>
-      <div className="nominationTileConatiner">
+      <div className="grid-x grid-margin-x grid-padding-x">
+        <NominationFormTile memes={memes} />
+        <NominationFormTile memes={memes} />
+        <NominationFormTile memes={memes} />
         <NominationFormTile memes={memes} />
       </div>
     </div>
