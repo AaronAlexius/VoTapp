@@ -46,6 +46,7 @@ const NominationFormTile = (props) => {
       } else {
         const body = await response.json() 
         const userMeme = body
+        console.log(body)
         setMeme(userMeme)
       }
     } catch (error) {
@@ -77,6 +78,7 @@ const NominationFormTile = (props) => {
     return (
       <div 
         key={i} 
+        className="card-section"
         name={meme.name} 
         template_id={meme.id}
         box_count={meme.box_count}
@@ -91,13 +93,13 @@ const NominationFormTile = (props) => {
   }, [])
 
   return (
-    <div id="nomination-container" className="nominationTile">
+    <div id="nomination-container" className="cell card small-12 medium-6 ">
       <form onSubmit={handleOnSubmit}>
         <label>
-          <h4>Select your meme from the collection below</h4>
-        <div className="memeMap">
-          {options}
-        </div>
+          <h4 className="card-divider text-center">Choose a meme</h4>
+          <div className="memeMap slider" data-slider>
+            <div className="card card-image">{options}</div>
+          </div>
         </label>
         <div>
         </div>

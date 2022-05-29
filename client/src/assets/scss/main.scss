@@ -8,6 +8,11 @@
   box-sizing: border-box;
 }
 
+// palette: 
+  // primary: #196B42,
+  // secondary: #19426B,
+  // tertiary: #196B6B,
+
 :root {
   -moz-tab-size: 4;
   tab-size: 4;
@@ -29,22 +34,22 @@
   padding: 2em;
 }
 
-.nominationTile {
-  border-style: solid;
-  border-radius:2em;
-  height: auto;
-  width: 80%;
-  margin: auto;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  padding: 2em;
-}
+// .nominationTile {
+//   border-style: solid;
+//   // border-radius:2em;
+//   // height: auto;
+//   // width: 80%;
+//   margin: auto;
+//   margin-top: 10px;
+//   margin-bottom: 10px;
+//   padding: 2em;
+// }
 
-.nominationTileContainer {
-  display: flex;
-  flex-wrap: wrap;
+// .nominationTileContainer {
+//   display: flex;
+//   flex-wrap: wrap;
 
-}
+// }
 
 .formContainer {
   grid-template-columns: 1fr 500px 1fr;
@@ -54,8 +59,8 @@
 
 .memeMap {
   overflow-y: scroll;
-  height: 400px;
-  width: 75%;
+  height: 30em;
+  width: 85%;
   margin: auto;
 }
 

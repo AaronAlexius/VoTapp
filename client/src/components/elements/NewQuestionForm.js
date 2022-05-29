@@ -2,8 +2,9 @@ import React, { useState } from "react"
 
 const NewQuestionForm = (props) => {
   const { postTopic } = props
-  const defaultState = { topic: "Write your topic here" }
+  const defaultState = { topic: "" }
   const [voteTopic, setVoteTopic] = useState(defaultState)
+  const { shouldRedirect } = props
   
   const handleInputChange = event => {
     setVoteTopic({
@@ -35,6 +36,7 @@ const NewQuestionForm = (props) => {
               type="text"
               className=""
               name="topic"
+              placeholder="Write a topic!"
               value={voteTopic.topic}
               onChange={handleInputChange}
               />
@@ -45,6 +47,7 @@ const NewQuestionForm = (props) => {
               className="cell callout secondary small-1">Save Topic
             </button>
         </form>
+       
       </div>
     </div>
   )

@@ -10,6 +10,7 @@ import HomeShowPage from "./pages/HomeShowPage";
 import GenerateRoom from "./pages/GenerateRoom";
 import UserRecordsShowPage from "./pages/UserRecordsShowPage";
 import TopicShowPage from "./pages/TopicShowPage";
+import BreadCrumbBar from "./elements/BreadCrumbBar";
 
 const App = (props) => {
   const [currentUser, setCurrentUser] = useState({});
@@ -30,6 +31,7 @@ const App = (props) => {
   return (
     <Router>
       <TopBar user={currentUser} />
+      <BreadCrumbBar user={currentUser} />
       <Switch>
         <Route exact path="/users/new" component={RegistrationForm} />
         <Route exact path="/user-sessions/new" component={SignInForm} />
