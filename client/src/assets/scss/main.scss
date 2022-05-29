@@ -8,11 +8,6 @@
   box-sizing: border-box;
 }
 
-// palette: 
-  // primary: #196B42,
-  // secondary: #19426B,
-  // tertiary: #196B6B,
-
 :root {
   -moz-tab-size: 4;
   tab-size: 4;
@@ -34,25 +29,7 @@
   padding: 2em;
 }
 
-// .nominationTile {
-//   border-style: solid;
-//   // border-radius:2em;
-//   // height: auto;
-//   // width: 80%;
-//   margin: auto;
-//   margin-top: 10px;
-//   margin-bottom: 10px;
-//   padding: 2em;
-// }
-
-// .nominationTileContainer {
-//   display: flex;
-//   flex-wrap: wrap;
-
-// }
-
 .formContainer {
-  grid-template-columns: 1fr 500px 1fr;
   width: 75%;
   margin: auto;
 }
@@ -80,11 +57,6 @@
   align-content: center;
   align-items: center;
   margin: auto;
-  // justify-content: center;
-
-  // width: 75%;
-  // grid-template-columns: auto;
-  // margin-bottom: 10px;
 }
 
 .header {

@@ -1,7 +1,6 @@
 import { User } from "../../../models/index.js";
-import { Question } from "../../../models/index.js";
 
-class QuestionSeeder {
+class TopicSeeder {
   static async seed() {
     const baru = await User.query().findOne({ email: "baru@email.com" })
     const winter = await User.query().findOne({ email: "wintermute@email.com" })

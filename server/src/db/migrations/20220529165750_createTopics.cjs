@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-const tableName = "answers";
+const tableName = "topics";
 /**
  * @typedef {import("knex")} Knex
  */
@@ -8,28 +8,19 @@ const tableName = "answers";
  * @param {Knex} knex
  */
 exports.up = async (knex) => {
-  const tableExists = await knex.schema.hasTable(tableName);
+  const tableExists = await knex.schema.hasTable(tableName)
 
   if(!tableExists) {
     console.log(`Creating ${tableName}`);
     return knex.schema.createTable(tableName, (t) => {
       t.bigIncrements("id");
-      t.bigInteger("userId")
+      t.string("topicText")
         .notNullable()
-        .index()
-        .unsigned()
-        .references("users.id")
-      t.bigInteger("questionsId")
+      t.string("roomUrl")
         .notNullable()
-        .index()
-        .unsigned()
-        .references("questions.id")
-      t.timestamp("createdAt").notNullable().defaultTo(knex.fn.now())
-      t.timestamp("updatedAt").notNullable().defaultTo(knex.fn.now())
     })
   }
 }
-
 /**
  * @param {Knex} knex
  */

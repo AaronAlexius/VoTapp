@@ -47,7 +47,6 @@ const NewQuestionForm = (props) => {
               className="cell callout secondary small-1">Save Topic
             </button>
         </form>
-       
       </div>
     </div>
   )
