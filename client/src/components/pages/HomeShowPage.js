@@ -8,8 +8,8 @@ const HomeShowPage = ({ user }) => {
 
 
   return (
-    <div className="grid-container">
-      <h1>Welcome to VoTapp!</h1>
+    <div className="grid-x grid-margin-x align-center-middle text-center">
+      <h1 className="cell small-8">Welcome to VoTapp!</h1>
     </div>
   )
 }

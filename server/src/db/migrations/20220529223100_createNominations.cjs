@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-const tableName = "memes";
+const tableName = "nominations";
 /**
  * @typedef {import("knex")} Knex
  */
@@ -19,11 +19,14 @@ exports.up = async (knex) => {
         .index()
         .unsigned()
         .references("users.id")
-      t.bigInteger("questionsId")
+      t.bigInteger("topicId")
         .notNullable()
         .index()
         .unsigned()
-        .references("questions.id")
+        .references("topics.id")
+      t.string("memeData")
+        .notNullable()
+      t.boolean("winner")
       t.timestamp("createdAt").notNullable().defaultTo(knex.fn.now())
       t.timestamp("updatedAt").notNullable().defaultTo(knex.fn.now())
     })
