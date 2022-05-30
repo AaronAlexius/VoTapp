@@ -8,16 +8,15 @@ class Topic extends Model {
   static get jsonSchema() {
     return {
       type: "object",
-      required: ["topicText", "roomUrl", ],
+      required: ["topicText"], 
       properties: {
-        topicText: { type: "string" },
-        roomUrl: { type: "string" }
+        topicText: { type: "string" }
       }
     }
   }
 
   static get relationMappings() {
-    const { User, Nomination, Rooms } = require("./index.js")
+    const { User, Nomination, Room } = require("./index.js")
 
     return {
       user: {
@@ -36,8 +35,8 @@ class Topic extends Model {
         relation: Model.BelongsToOneRelation,
         modelClass: Room,
         join: {
-          from: "topics.roomId",
-          to: "rooms.id"
+          from: "topics.id",
+          to: "rooms.topicId"
         }
       },
       nomination: {

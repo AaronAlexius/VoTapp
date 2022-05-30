@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import NewQuestionForm from "../elements/NewQuestionForm.js";
+import NewTopicForm from "../elements/NewTopicForm.js";
 import ErrorList from "../layout/ErrorList.js";
 import translateServerErrors from "../../services/translateServerErrors.js";
 import { Redirect, Link } from "react-router-dom";
@@ -30,7 +30,7 @@ const GenerateRoom = props => {
         }
       } else {
       const body = await response.json()
-      const roomId = body.question.id
+      const roomId = body.topic.id
       setNewRoomId(roomId)
       setShouldRedirect(true)
       }
@@ -51,7 +51,7 @@ const GenerateRoom = props => {
   return (
     <div className="grid-container">
       <ErrorList errors={errors} />
-      <NewQuestionForm postTopic={postTopic} shouldRedirect={shouldRedirect}/>
+      <NewTopicForm postTopic={postTopic} shouldRedirect={shouldRedirect}/>
       <div className="text-center">
         {shouldRedirect ? (<>
           <Link className="cell shrink small-6 callout primary" to={`/rooms/${newRoomId}`} >

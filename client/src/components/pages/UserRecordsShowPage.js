@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
-import QuestionTile from "../elements/QuestionTile.js";
+import TopicTile from "../elements/TopicTile.js";
 import { useParams } from "react-router-dom";
 import BreadCrumbBar from "../elements/BreadCrumbBar.js";
 
 const UserRecordsShowPage = (props) => {
-  const [questions, setQuestions] = useState([])
+  const [topics, setTopics] = useState([])
 
   const { id } = useParams()
   const userName = props.user.userName
   
-  const getQuestions = async () => {
+  const getTopics = async () => {
     try {
       const response = await fetch(`/api/v1/users/${id}`)
       if (!response.ok) {
@@ -18,32 +18,32 @@ const UserRecordsShowPage = (props) => {
         throw(error)
       }
       const body = await response.json()
-      const bodyQuestions = body.user.questions
-      setQuestions(bodyQuestions)
+      const bodyTopics = body.user.topics
+      setTopics(bodyTopics)
     } catch (error) {
       console.error(`Error in fetch: ${error.message}`)
     }
   }
   
   useEffect(() => {
-    getQuestions()
+    getTopics()
   }, [])
 
-  const questionTiles = questions.map(question => {
+  const topicTiles = topics.map(topic => {
     return (
-      <QuestionTile  
-        key={question.id}
-        id={question.id}
-        topic={question.topic}
+      <TopicTile  
+        key={topic.id}
+        id={topic.id}
+        topic={topic.topic}
       />
     )
   }) 
 
   return (
     <div className="grid-container">
-      <h1>{userName} here are you old questions!</h1>
+      <h1>{userName} here are you old topics!</h1>
       <div className="grid-x grid-margin-x">
-        {questionTiles}
+        {topicTiles}
       </div>
     </div>
   )

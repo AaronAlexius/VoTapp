@@ -19,11 +19,12 @@ usersRouter.post("/", async (req, res) => {
 });
 
 usersRouter.get("/:id", async (req, res) => {
-  const userId = req.params.id
+  const id = req.params.id
+
   try {
-    const user = await User.query().findById(userId)
-    const userQuestions = await UserSerializer.getDetail(user)
-    return res.status(200).json({ user: userQuestions })
+    const user = await User.query().findById(id)
+    const userTopics = await UserSerializer.getDetail(user)
+    return res.status(200).json({ user: userTopics })
   } catch (err) {
     return res.status(500).json({ errors: err})
   }

@@ -1,6 +1,6 @@
 import React from "react";
 
-const QuestionTile = (props) => {
+const TopicTile = (props) => {
   const { id, key, topic } = props
 
   return (
@@ -12,4 +12,4 @@ const QuestionTile = (props) => {
   )
 }
 
-export default QuestionTile
+export default TopicTile

@@ -1,8 +1,8 @@
 import React, { useState } from "react"
 
-const NewQuestionForm = (props) => {
+const NewTopicForm = (props) => {
   const { postTopic } = props
-  const defaultState = { topic: "" }
+  const defaultState = { topicText: "" }
   const [voteTopic, setVoteTopic] = useState(defaultState)
   const { shouldRedirect } = props
   
@@ -35,9 +35,9 @@ const NewQuestionForm = (props) => {
               id="topic"
               type="text"
               className=""
-              name="topic"
+              name="topicText"
               placeholder="Write a topic!"
-              value={voteTopic.topic}
+              value={voteTopic.topicText}
               onChange={handleInputChange}
               />
           </label>
@@ -52,4 +52,4 @@ const NewQuestionForm = (props) => {
   )
 }
 
-export default NewQuestionForm
+export default NewTopicForm

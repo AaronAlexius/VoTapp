@@ -48,7 +48,7 @@ class User extends uniqueFunc(Model) {
             from: "rooms.userId",
             to: "rooms.topicId"
           },
-          to: "topics.userId"
+          to: "topics.id"
         }
       },
       nominations: {

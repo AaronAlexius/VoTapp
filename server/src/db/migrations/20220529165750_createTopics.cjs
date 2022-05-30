@@ -15,10 +15,12 @@ exports.up = async (knex) => {
     return knex.schema.createTable(tableName, (t) => {
       t.uuid("id")
         .primary()
+        .unique()
+        .defaultTo(knex.raw('gen_random_uuid()'))
       t.string("topicText")
         .notNullable()
-      t.string("roomUrl")
-        .notNullable()
+      t.timestamp("createdAt").notNullable().defaultTo(knex.fn.now())
+      t.timestamp("updatedAt").notNullable().defaultTo(knex.fn.now())
     })
   }
 }
