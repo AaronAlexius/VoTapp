@@ -13,7 +13,8 @@ exports.up = async (knex) => {
   if(!tableExists) {
     console.log(`Creating ${tableName}`);
     return knex.schema.createTable(tableName, (t) => {
-      t.bigIncrements("id");
+      t.uuid("id")
+        .primary()
       t.string("topicText")
         .notNullable()
       t.string("roomUrl")

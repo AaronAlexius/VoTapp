@@ -12,7 +12,9 @@ class Nomination extends Model {
       properties: {
         userId: { text: ["integer", "string"] },
         topicId: { text: ["integer", "string"] },
-        memeData: { type: "string" }
+        memeData: { type: "string" },
+        memeUrl: { type: "string" },
+        numberVotes: { type: ["integer", "string"] }
       }
     }
   }
