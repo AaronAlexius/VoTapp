@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import SignOutButton from "../authentication/SignOutButton";
+import BreadCrumbBar from "../elements/BreadCrumbBar";
 
 const TopBar = ({ user }) => {
   // const { id, userName } = user
@@ -33,12 +34,7 @@ const TopBar = ({ user }) => {
       <div className="top-bar-left">
         <ul className="menu">
           <li className="menu-text">VoTapp</li>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li >
-            <ul>{user ? userNavigation : ""}</ul>
-          </li>
+          <li className="menu-text">{user ? userNavigation : ""}</li>
         </ul>
       </div>
       <div className="top-bar-right">

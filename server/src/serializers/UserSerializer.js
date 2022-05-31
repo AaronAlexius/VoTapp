@@ -1,4 +1,4 @@
-import QuestionSerializer from "./QuestionSerializer.js"
+import TopicSerializer from "./TopicSerializer.js"
 
 class UserSerializer {
   static async getDetail(user) {
@@ -9,13 +9,13 @@ class UserSerializer {
       for (const attribute of allowedAttributes) {
         serializedUser[attribute] = user[attribute]
       }
-      const relatedQuestions = await user.$relatedQuery("questions")
-      const serializedQuestions = await Promise.all(
-        relatedQuestions.map(async (question) => {
-          return QuestionSerializer.getSummary(question)
+      const relatedTopics = await user.$relatedQuery("topics")
+      const serializedTopics = await Promise.all(
+        relatedTopics.map(async (topic) => {
+          return TopicSerializer.getSummary(topic)
         })
       )
-      serializedUser.questions = serializedQuestions
+      serializedUser.topics = serializedTopics
       return serializedUser
     } catch (error) {
       throw error 

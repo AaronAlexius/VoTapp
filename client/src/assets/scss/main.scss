@@ -20,15 +20,46 @@
 
 .messageContainer {
   border-style: solid;
-  height: 200px;
-  width: 50%;
+  border-radius:2em;
+  height: auto;
+  width: 80%;
   margin: auto;
   margin-top: 10px;
   margin-bottom: 10px;
+  padding: 2em;
 }
 
 .formContainer {
-  grid-template-columns: 1fr 500px 1fr;
-  width: 50%;
+  width: 75%;
   margin: auto;
+}
+
+.memeMap {
+  overflow-y: scroll;
+  height: 30em;
+  width: 85%;
+  margin: auto;
+}
+
+.meme {
+  margin: auto;
+}
+
+.largeContainer {
+  display: flex;
+  flex-direction: column;
+  background-color: #5e9797;
+}
+
+.centerHeaders {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  margin: auto;
+}
+
+.header {
+  display: flex;
+  flex-grow: 1;
 }
