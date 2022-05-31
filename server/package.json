@@ -43,7 +43,7 @@
     "install-peerdeps": "^3.0.3",
     "jest": "^28.1.0",
     "nodemon": "^2.0.16",
-    "webpack": "^5.72.1",
+    "webpack": "^5.3.2",
     "webpack-cli": "^4.9.2",
     "webpack-dev-middleware": "^4.0.0",
     "webpack-hot-middleware": "^2.25.1"
