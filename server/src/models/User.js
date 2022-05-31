@@ -2,6 +2,7 @@
 const Bcrypt = require("bcrypt");
 const unique = require("objection-unique");
 const Model = require("./Model");
+const Nomination = require("./Nomination");
 
 const saltRounds = 10;
 
@@ -27,7 +28,6 @@ class User extends uniqueFunc(Model) {
     return {
       type: "object",
       required: ["email", "userName"],
-
       properties: {
         email: { type: "string", pattern: "^\\S+@\\S+\\.\\S+$" },
         cryptedPassword: { type: "string" },
@@ -37,15 +37,26 @@ class User extends uniqueFunc(Model) {
   }
 
   static get relationMappings() {
-    const { Question } = require("./index.js")
-
+    const { Topic, Room, Nomination } = require("./index.js")
     return {
-      questions: {
-        relation: Model.HasManyRelation,
-        modelClass: Question,
+      topics: {
+        relation: Model.ManyToManyRelation,
+        modelClass: Topic,
         join: {
           from: "users.id",
-          to: "questions.userId"
+          through: {
+            from: "rooms.userId",
+            to: "rooms.topicId"
+          },
+          to: "topics.id"
+        }
+      },
+      nominations: {
+        relation: Model.HasManyRelation,
+        modelClass: Nomination,
+        join: {
+          from: "users.id",
+          to: "nominations.userId"
         }
       }
     }

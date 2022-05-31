@@ -69,8 +69,9 @@ $global-font-size: 100%;
 $global-width: rem-calc(1200);
 $global-lineheight: 1.5;
 $foundation-palette: (
-  primary: #1779ba,
-  secondary: #767676,
+  primary: #196B42,
+  secondary: #19426B,
+  tertiary: #196B6B,
   success: #3adb76,
   warning: #ffae00,
   alert: #cc4b37,
@@ -89,7 +90,7 @@ $global-padding: 1rem;
 $global-position: 1rem;
 $global-weight-normal: normal;
 $global-weight-bold: bold;
-$global-radius: 0;
+$global-radius: 10px;
 $global-menu-padding: 0.7rem 1rem;
 $global-menu-nested-margin: 1rem;
 $global-text-direction: ltr;
@@ -285,7 +286,7 @@ $breadcrumbs-item-color-disabled: $medium-gray;
 $breadcrumbs-item-margin: 0.75rem;
 $breadcrumbs-item-uppercase: true;
 $breadcrumbs-item-separator: true;
-$breadcrumbs-item-separator-item: '/';
+$breadcrumbs-item-separator-item: '>';
 $breadcrumbs-item-separator-item-rtl: '\\';
 $breadcrumbs-item-separator-color: $medium-gray;
 
@@ -427,6 +428,7 @@ $dropdown-menu-item-background-active: transparent;
 
 $flex-source-ordering-count: 6;
 $flexbox-responsive-breakpoints: true;
+
 
 // 20. Forms
 // ---------

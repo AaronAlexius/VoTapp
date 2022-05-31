@@ -7,9 +7,10 @@ import RegistrationForm from "./registration/RegistrationForm";
 import SignInForm from "./authentication/SignInForm";
 import TopBar from "./layout/TopBar";
 import HomeShowPage from "./pages/HomeShowPage";
-import RoomShowPage from "./pages/RoomShowPage";
 import GenerateRoom from "./pages/GenerateRoom";
 import UserRecordsShowPage from "./pages/UserRecordsShowPage";
+import TopicShowPage from "./pages/TopicShowPage";
+import BreadCrumbBar from "./elements/BreadCrumbBar";
 
 const App = (props) => {
   const [currentUser, setCurrentUser] = useState({});
@@ -30,6 +31,7 @@ const App = (props) => {
   return (
     <Router>
       <TopBar user={currentUser} />
+      <BreadCrumbBar user={currentUser} />
       <Switch>
         <Route exact path="/users/new" component={RegistrationForm} />
         <Route exact path="/user-sessions/new" component={SignInForm} />
@@ -40,6 +42,7 @@ const App = (props) => {
           <UserRecordsShowPage user={currentUser}/>
         </Route>
         <Route exact path="/rooms/new" component={GenerateRoom} />
+        <Route exact path="/rooms/:id" component={TopicShowPage} />
       </Switch>
     </Router>
   );
