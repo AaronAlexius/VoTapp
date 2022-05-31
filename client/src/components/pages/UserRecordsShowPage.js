@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import TopicTile from "../elements/TopicTile.js";
 import { useParams } from "react-router-dom";
-import BreadCrumbBar from "../elements/BreadCrumbBar.js";
 
 const UserRecordsShowPage = (props) => {
   const [topics, setTopics] = useState([])
@@ -34,7 +33,7 @@ const UserRecordsShowPage = (props) => {
       <TopicTile  
         key={topic.id}
         id={topic.id}
-        topic={topic.topic}
+        topic={topic.topicText}
       />
     )
   }) 

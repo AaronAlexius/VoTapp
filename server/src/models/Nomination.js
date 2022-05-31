@@ -8,12 +8,11 @@ class Nomination extends Model {
   static get jsonSchema() {
     return {
       type: "object",
-      required: ["userId", "topicId", "memeData"],
+      required: ["userId", "topicId", "memeUrl"],
       properties: {
-        userId: { text: ["integer", "string"] },
-        topicId: { text: ["integer", "string"] },
-        memeData: { type: "string" },
-        memeUrl: { type: "string" },
+        userId: { type: ["integer", "string"] },
+        topicId: { type: ["integer", "string"] },
+        memeUrl: { type: "string", pattern: "^https?:\/\/i.imgflip.com\/(.+)(\.(jpg))$" },
         numberVotes: { type: ["integer", "string"] }
       }
     }

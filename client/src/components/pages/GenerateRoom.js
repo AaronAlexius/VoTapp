@@ -40,9 +40,6 @@ const GenerateRoom = props => {
   }
 
   const handleRedirect = () => {
-    console.log("button works")
-    console.log(newRoomId)
-    console.log(shouldRedirect)
     if (shouldRedirect) {
       return <Redirect to="/home" />
     }

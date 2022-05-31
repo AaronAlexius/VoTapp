@@ -13,10 +13,7 @@ exports.up = async (knex) => {
   if(!tableExists) {
     console.log(`Creating ${tableName}`);
     return knex.schema.createTable(tableName, (t) => {
-      t.uuid("id")
-        .primary()
-        .unique()
-        .defaultTo(knex.raw('gen_random_uuid()'))
+      t.bigIncrements("id")
       t.string("topicText")
         .notNullable()
       t.timestamp("createdAt").notNullable().defaultTo(knex.fn.now())

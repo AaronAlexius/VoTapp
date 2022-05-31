@@ -1,37 +1,33 @@
 import React, { useEffect, useState } from "react"
 import ErrorList from "../layout/ErrorList.js"
 import translateServerErrors from "../../services/translateServerErrors.js"
-import qs from 'qs'
 
 const NominationFormTile = (props) => {
-  const { memes } = props
+  const { memes, id } = props
   const [errors, setErrors] = useState([])
   const [meme, setMeme] = useState({
-    success: "", 
-    data: {
-      url: "",
-      page_url: "",
-    },
+    id: "", 
+    userId: "",
+    topicId: "",
+    memeUrl: "",
+    numberVotes: null
   })
 
   const [nomination, setNomination] = useState({
     template_id: 0,
-    username: "",
-    password: "",
     text0: "",
     text1: ""
   })
 
-  
   const makeAMeme = async () => {
     console.log("Form sent")
     try {
-      const response = await fetch("https://api.imgflip.com/caption_image", { 
+      const response = await fetch(`/api/v1/nominations/${id}`, { 
         method: 'POST',
         headers: new Headers({
-          'Content-Type': 'application/x-www-form-urlencoded'
+          'Content-Type': 'application/json'
         }),
-        body: qs.stringify(nomination)
+        body: JSON.stringify(nomination)
       })
       if(!response.ok) {
         if (response.status === 422) {
@@ -45,8 +41,8 @@ const NominationFormTile = (props) => {
         }
       } else {
         const body = await response.json() 
-        const userMeme = body
         console.log(body)
+        const userMeme = body.meme
         setMeme(userMeme)
       }
     } catch (error) {
@@ -93,7 +89,7 @@ const NominationFormTile = (props) => {
   }, [])
 
   return (
-    <div id="nomination-container" className="cell card small-12 medium-6 ">
+    <div id="nomination-container" className="cell card small-12 medium-6">
       <form onSubmit={handleOnSubmit}>
         <label>
           <h4 className="card-divider text-center">Choose a meme</h4>
@@ -128,7 +124,7 @@ const NominationFormTile = (props) => {
           </button>
       </form>
       <h1>Here is your meme!</h1>
-      <img className="meme" src={meme.data.url}/>
+      <img className="meme" src={meme.memeUrl}/>
     </div>
   )
 }

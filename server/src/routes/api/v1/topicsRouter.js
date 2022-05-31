@@ -1,14 +1,10 @@
 import express from "express";
-import objection from "objection";
-const { ValidationError } = objection;
-import { Topic, Room } from "../../../models/index.js"
+import { Topic } from "../../../models/index.js"
 import TopicSerializer from "../../../serializers/TopicSerializer.js";
-import cleanUserInput from "../../../services/cleanUserInput.js"
-import { User } from "../../../models/index.js"
 
-const roomsRouter = new express.Router()
+const topicsRouter = new express.Router()
 
-roomsRouter.get("/", async (req, res) => {
+topicsRouter.get("/", async (req, res) => {
   try {
     const topics = await Topic.query()
     const serializedTopics = topics.map(topics => {
@@ -20,7 +16,7 @@ roomsRouter.get("/", async (req, res) => {
   }
 })
 
-roomsRouter.post("/new", async (req, res) => {
+topicsRouter.post("/new", async (req, res) => {
   const { body } = req
   const formInput = cleanUserInput(body)
   const { topicText } = formInput
@@ -36,14 +32,14 @@ roomsRouter.post("/new", async (req, res) => {
   }
 })
 
-roomsRouter.get("/:id", async (req, res) => {
-  const roomId = req.params.id
+topicsRouter.get("/:id", async (req, res) => {
+  const topicId = req.params.id
   try {
-    const room = await Room.query().findById(roomId)
-    return res.status(200).json({ room: room })
+    const topic = await Topic.query().findById(topicId)
+    return res.status(200).json({ topic: topic })
   } catch (err) {
     return res.status(500).json({ errors: err})
   }
 })
 
-export default roomsRouter
+export default topicsRouter

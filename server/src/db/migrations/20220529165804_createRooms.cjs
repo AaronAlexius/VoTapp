@@ -19,7 +19,7 @@ exports.up = async (knex) => {
         .index()
         .unsigned()
         .references("users.id")
-      t.uuid("topicId")
+      t.bigInteger("topicId")
         .notNullable()
         .index()
         .unsigned()
