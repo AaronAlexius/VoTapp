@@ -3,52 +3,15 @@ import ErrorList from "../layout/ErrorList.js"
 import translateServerErrors from "../../services/translateServerErrors.js"
 
 const NominationFormTile = (props) => {
-  const { memes, id } = props
+  const { memes, id, makeAMeme } = props
   const [errors, setErrors] = useState([])
-  const [meme, setMeme] = useState({
-    id: "", 
-    userId: "",
-    topicId: "",
-    memeUrl: "",
-    numberVotes: null
-  })
+  
 
   const [nomination, setNomination] = useState({
     template_id: 0,
     text0: "",
     text1: ""
   })
-
-  const makeAMeme = async () => {
-    console.log("Form sent")
-    try {
-      const response = await fetch(`/api/v1/nominations/${id}`, { 
-        method: 'POST',
-        headers: new Headers({
-          'Content-Type': 'application/json'
-        }),
-        body: JSON.stringify(nomination)
-      })
-      if(!response.ok) {
-        if (response.status === 422) {
-          const body = await response.json()
-          const newErrors = translateServerErrors(body.errors)
-          return setErrors(newErrors)
-        } else {
-          const errorMessage = `${response.status} (${response.statusText})`
-          const error = new Error(errorMessage)
-          throw error
-        }
-      } else {
-        const body = await response.json() 
-        console.log(body)
-        const userMeme = body.meme
-        setMeme(userMeme)
-      }
-    } catch (error) {
-      console.error(`Error in fetch: ${error.message}`)
-    }
-  } 
 
   const handleInputChange = event => {
     setNomination({
@@ -123,8 +86,8 @@ const NominationFormTile = (props) => {
             className="button">Make a meme
           </button>
       </form>
-      <h1>Here is your meme!</h1>
-      <img className="meme" src={meme.memeUrl}/>
+      {/* <h1>Here is your meme!</h1> */}
+      {/* <img className="meme" src={meme.memeUrl}/> */}
     </div>
   )
 }

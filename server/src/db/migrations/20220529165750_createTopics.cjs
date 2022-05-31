@@ -16,6 +16,7 @@ exports.up = async (knex) => {
       t.bigIncrements("id")
       t.string("topicText")
         .notNullable()
+      // t.bigInteger("winningNominationId")
       t.timestamp("createdAt").notNullable().defaultTo(knex.fn.now())
       t.timestamp("updatedAt").notNullable().defaultTo(knex.fn.now())
     })
