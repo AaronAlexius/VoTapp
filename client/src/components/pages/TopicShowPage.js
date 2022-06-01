@@ -85,14 +85,11 @@ const TopicShowPage = (props) => {
         <h2 className="header callout text-center primary">{currentTopic.topicText}</h2>
       </div>
       <div className="centerHeaders">
-        <h3 className="header">Nominations to consider"</h3>
+        <h3 className="header">Nominations to consider</h3>
         {nominationMap}
       </div>
-      <div className="grid-x grid-margin-x grid-padding-x">
+      <div className="center-contents">
         <NominationFormTile memes={memes} id={id}/>
-        <NominationFormTile memes={memes} />
-        <NominationFormTile memes={memes} />
-        <NominationFormTile memes={memes} />
       </div>
     </div>
   )
