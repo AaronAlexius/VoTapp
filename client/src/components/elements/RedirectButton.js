@@ -2,7 +2,6 @@ import React from "react";
 
 const RedirectButton = ({ handleRedirect }) => {
 
-
   return (
     <button 
       type="button"
