@@ -7,7 +7,7 @@ import RegistrationForm from "./registration/RegistrationForm";
 import SignInForm from "./authentication/SignInForm";
 import TopBar from "./layout/TopBar";
 import HomeShowPage from "./pages/HomeShowPage";
-import GenerateRoom from "./pages/GenerateRoom";
+import GenerateTopic from "./pages/GenerateTopic";
 import UserRecordsShowPage from "./pages/UserRecordsShowPage";
 import TopicShowPage from "./pages/TopicShowPage";
 import BreadCrumbBar from "./elements/BreadCrumbBar";
@@ -41,8 +41,8 @@ const App = (props) => {
         <Route exact path="/users/:id" >
           <UserRecordsShowPage user={currentUser}/>
         </Route>
-        <Route exact path="/rooms/new" component={GenerateRoom} />
-        <Route exact path="/rooms/:id" component={TopicShowPage} />
+        <Route exact path="/topics/new" component={GenerateTopic} />
+        <Route exact path="/topics/:id" component={TopicShowPage} />
       </Switch>
     </Router>
   );

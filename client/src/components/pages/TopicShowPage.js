@@ -4,30 +4,19 @@ import { useParams } from "react-router-dom"
 
 const TopicShowPage = (props) => {
   const [memes, setMemes] = useState([])
+  const { id } = useParams()
   const [currentTopic, setCurrentTopic] = useState({
     topic: "",
+  }) 
+
+  const [userMeme, setUserMeme] = useState({
+    id: "", 
+    userId: "",
+    topicId: "",
+    memeUrl: "",
+    numberVotes: null
   })
-  const [nominations, setNominations] = useState([])
-  const { id } = useParams()
-
-  // const [votingClosed, setVotingClosed] = useState(false)
-  // const [nominationThatTheUserVotedOn, setNominationThatTheUserVotedOn] = useState(false)
-  // 
-
-  const getNominations = async () => {
-    try {
-      const response = await fetch(`api/v1/nominations/${id}`)
-      if (!response.ok) {
-        const errorMessage = `${response.status} (${response.statusText})`
-        const error = new Error(errorMessage)
-        throw (error)
-      }
-      const body = await response.json()
-      setNominations(body.data.nominations)
-    } catch (error) {
-      console.error(`Error in fetch: ${error.message}`)
-    }
-  }
+  const [showUserMeme, setShowUserMeme] = useState(false)
 
   const getMemes = async () => {
     try {
@@ -59,80 +48,59 @@ const TopicShowPage = (props) => {
     }
   }
 
-  let intervalId
+  const makeAMeme = async (nomination) => {
+    try {
+      const response = await fetch(`/api/v1/nominations/${id}`, { 
+        method: 'POST',
+        headers: new Headers({
+          'Content-Type': 'application/json'
+        }),
+        body: JSON.stringify(nomination)
+      })
+      if(!response.ok) {
+        if (response.status === 422) {
+          const body = await response.json()
+          const newErrors = translateServerErrors(body.errors)
+          return setErrors(newErrors)
+        } else {
+          const errorMessage = `${response.status} (${response.statusText})`
+          const error = new Error(errorMessage)
+          throw error
+        }
+      } else {
+        const body = await response.json() 
+        const userMeme = body.meme
+        setUserMeme(userMeme)
+        setShowUserMeme(true)
+      }
+    } catch (error) {
+      console.error(`Error in fetch: ${error.message}`)
+    }
+  }
+
   useEffect(() => {
     getCurrentTopic()
     getMemes()
-    getNominations()
-  
-    // Invoke the request every 3 seconds.
-    intervalId = setInterval(getNominationsAndTopicOpenStatus, 3000);
   }, [])
-
-  const getNominationsAndTopicOpenStatus = () => {
-    // you could even combine getNominations with getTopicOpenStatus to do this in one request
-    getNominations()
-    // getTopicOpenStatus
-    // this should keep checking if someone has clicked the "Close Voting" button by checking the `openStatus` of the topic
-      // if this comes back with "openStatus" of false, 
-        // then run clearInterval(intervalId)
-        // and then redirect the user to "/rooms/:topicId/results" 
-  }
-
-  
-  
-  // Next steps 
-  // finish the voting feature after you get the nominations to display on the top of the page
-  // in this voting feature, clicking on a "nomination to consider" will add a vote for this user on this topic"
-    // you will need a migration for "votes" just like in group projects
-  // remove the extra forms, we only one 
-  
-  // everyone can see a button called "Close Voting / Review Results"
-  // add a migration to add a "openStatus" column to a topic so that we know when voting is concluded
-
-
-  // Assign this as callback to the CloseVotingButton
-  // const closeButtonClick = (event) => {
-    // clearInterval(intervalId)
-    // make a post request with the topic id to set the topic openStatus to false on backend 
-      // also on the backend, tally the votes and set the winning nomination id on the topic record to the one with the most votes
-      // after fetch redirect to /rooms/15/results to display the best nomination
-  // }
-
-// on the results page, we will make an initial fetch to get the topic, display the winning nomination (and who made it) 
-
-  
-
-
-  const memeMap = memes.map(meme => {
-    return (
-      <div key={meme.id} id={meme.id} className="meme">
-        <div>{meme.name}</div>
-        <img src={meme.url} alt={meme.name}/>
-        <hr></hr>
-      </div>
-    )
-  })
-
-  const nominationMap = nominations.map(meme => {
-    <div key={meme.userId} id={meme.userId} className="cell card small-12 medium-3 large-4">
-      <div classname="card-divider">{meme.userId}</div>
-      <img src={meme.memeUrl}/>
-    </div>
-  })
 
   return (
     <div className="grid-container largeContainer">
       <div className="centerHeaders">
-        <h2 className="header">Make a comment on this topic!</h2>
-        <h2 className="header callout text-center primary">{currentTopic.topicText}</h2>
+          {showUserMeme ? (<>
+            <h1>Here is your meme!</h1>
+            <img className="meme" src={userMeme.memeUrl}/>
+            </>)
+          : (<>
+            <h2 className="header">Make a comment on this topic!</h2>
+            <h2 className="header callout text-center primary">{currentTopic.topicText}</h2>
+            </>)
+          }
       </div>
       <div className="centerHeaders">
         <h3 className="header">Nominations to consider</h3>
-        {nominationMap}
       </div>
       <div className="grid-x grid-margin-x grid-padding-x">
-        <NominationFormTile memes={memes} id={id}/>
+        <NominationFormTile memes={memes} id={id} makeAMeme={makeAMeme} />
       </div>
     </div>
   )

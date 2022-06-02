@@ -4,7 +4,7 @@ import ErrorList from "../layout/ErrorList.js";
 import translateServerErrors from "../../services/translateServerErrors.js";
 import { Redirect, Link } from "react-router-dom";
 
-const GenerateRoom = props => {
+const GenerateTopic = props => {
   const [errors, setErrors] = useState([])
   const [shouldRedirect, setShouldRedirect] = useState(false)
   const [newRoomId, setNewRoomId] = useState()
@@ -51,7 +51,7 @@ const GenerateRoom = props => {
       <NewTopicForm postTopic={postTopic} shouldRedirect={shouldRedirect}/>
       <div className="text-center">
         {shouldRedirect ? (<>
-          <Link className="cell shrink small-6 callout primary" to={`/rooms/${newRoomId}`} >
+          <Link className="cell shrink small-6 callout primary" to={`/topics/${newRoomId}`} >
             Check out your new room.  
           </Link>
           </>) 
@@ -61,4 +61,4 @@ const GenerateRoom = props => {
   )
 }
 
-export default GenerateRoom
+export default GenerateTopic

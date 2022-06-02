@@ -1,12 +1,8 @@
 import React, { useEffect, useState } from "react"
-import ErrorList from "../layout/ErrorList.js"
-import translateServerErrors from "../../services/translateServerErrors.js"
 
 const NominationFormTile = (props) => {
-  const { memes, id, makeAMeme } = props
-  const [errors, setErrors] = useState([])
-  
-
+  const { memes, makeAMeme } = props
+  const [selected, setSelected] = useState()
   const [nomination, setNomination] = useState({
     template_id: 0,
     text0: "",
@@ -20,36 +16,40 @@ const NominationFormTile = (props) => {
     })
   }
 
+  const handleClick = (meme) => {
+    // let oldMeme = document.getElementById(selected)
+    // oldMeme.className = "card-selection"
+    // setSelected(meme.key)
+    setNomination({
+      ...nomination,
+      template_id: meme.id
+    })
+
+    // let selectedMeme = document.getElementById(selected)
+    // selectedMeme.className = "card-selection.highlight"
+  }
+  
   const handleOnSubmit = event => {
     event.preventDefault()
     
     makeAMeme(nomination)
   }
 
-  const handleClick = (id) => {
-    setNomination({
-      ...nomination,
-      template_id: id
-    })
-  }
-
   const options = memes.map((meme, i) => {
     return (
       <div 
         key={i} 
+        id={i}
         className="card-section"
         name={meme.name} 
         template_id={meme.id}
         box_count={meme.box_count}
-        onClick={() => handleClick(meme.id)}
+        onClick={() => handleClick(meme)}
         >
         <img src={meme.url} alt={meme.name}/>
       </div>
     )
   })
-
-  useEffect(() => {
-  }, [])
 
   return (
     <div id="nomination-container" className="cell card small-12 medium-6">
@@ -86,8 +86,7 @@ const NominationFormTile = (props) => {
             className="button">Make a meme
           </button>
       </form>
-      {/* <h1>Here is your meme!</h1> */}
-      {/* <img className="meme" src={meme.memeUrl}/> */}
+     
     </div>
   )
 }

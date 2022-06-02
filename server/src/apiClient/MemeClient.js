@@ -31,6 +31,7 @@ class MemeClient {
     }
     
     try {
+      debugger
       const response = await got.post(memeURL, {
         method: 'POST',
         headers: {
