@@ -12,7 +12,7 @@ const BreadCrumbBar = ( { user }) => {
               <li><Link className="" id="past-topics" to={`/users/${user.id}`} >
                 Past Topics
               </Link></li>
-              <li><Link className="" id="Create New Topic Room" to="/topics/new">
+              <li><Link className="" id="Create New Topic Room" to={"/topics/new"}>
                 Create A New Topic
               </Link></li>
             </ul>

@@ -51,6 +51,16 @@ class User extends uniqueFunc(Model) {
           to: "topics.id"
         }
       },
+
+      rooms: {
+        relation: Model.HasManyRelation,
+        modelClass: Room,
+        join: {
+          from: "users.id",
+          to: "rooms.userId"
+        }
+      },
+
       nominations: {
         relation: Model.HasManyRelation,
         modelClass: Nomination,

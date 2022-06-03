@@ -34,7 +34,7 @@ const TopBar = ({ user }) => {
       <div className="top-bar-left">
         <ul className="menu">
           <li className="menu-text">VoTapp</li>
-          <li className="menu-text">{user ? userNavigation : ""}</li>
+          <ul className="menu-text">{user ? userNavigation : ""}</ul>
         </ul>
       </div>
       <div className="top-bar-right">

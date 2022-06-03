@@ -1,6 +1,7 @@
 import express from "express";
 import { Topic } from "../../../models/index.js"
 import TopicSerializer from "../../../serializers/TopicSerializer.js";
+import cleanUserInput from "../../../services/cleanUserInput.js";
 
 const topicsRouter = new express.Router()
 

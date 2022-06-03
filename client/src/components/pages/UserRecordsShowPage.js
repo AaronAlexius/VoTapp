@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from "react";
-import TopicTile from "../elements/TopicTile.js";
+// import TopicTile from "../elements/TopicTile.js";
 import { useParams } from "react-router-dom";
 
 const UserRecordsShowPage = (props) => {
   const [topics, setTopics] = useState([])
-
-  const { id } = useParams()
-  const userName = props.user.userName
+  const userId = props.match.params.id
   
   const getTopics = async () => {
     try {
-      const response = await fetch(`/api/v1/users/${id}`)
+      const response = await fetch(`/api/v1/users/${userId}`)
       if (!response.ok) {
         const errorMessage = `${response.status} (${response.statusText})`
         const error = new Error(errorMessage)
@@ -28,19 +26,18 @@ const UserRecordsShowPage = (props) => {
     getTopics()
   }, [])
 
-  const topicTiles = topics.map(topic => {
+  const topicTiles = topics.map((topic, i) => {
     return (
-      <TopicTile  
-        key={topic.id}
-        id={topic.id}
-        topic={topic.topicText}
-      />
+      <div key={i} id={i} 
+        className="cell callout small-12 medium-6 large-4 primary">
+        <h5 className="text-center">{topic.topicText}</h5>
+      </div>
     )
   }) 
 
   return (
     <div className="grid-container">
-      <h1>{userName} here are you old topics!</h1>
+      <h1>Here are you old topics!</h1>
       <div className="grid-x grid-margin-x">
         {topicTiles}
       </div>

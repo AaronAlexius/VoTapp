@@ -38,10 +38,10 @@ const App = (props) => {
         <Route exact path="/">
           <HomeShowPage user={currentUser} />
         </Route>
-        <Route exact path="/users/:id" >
-          <UserRecordsShowPage user={currentUser}/>
+        <Route exact path="/users/:id" component={UserRecordsShowPage} />
+        <Route exact path="/topics/new">
+          <GenerateTopic user={currentUser} />
         </Route>
-        <Route exact path="/topics/new" component={GenerateTopic} />
         <Route exact path="/topics/:id" component={TopicShowPage} />
       </Switch>
     </Router>

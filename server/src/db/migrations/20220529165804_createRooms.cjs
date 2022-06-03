@@ -24,8 +24,6 @@ exports.up = async (knex) => {
         .index()
         .unsigned()
         .references("topics.id")
-      t.string("roomUrl")
-        .notNullable()
       t.timestamp("createdAt").notNullable().defaultTo(knex.fn.now())
       t.timestamp("updatedAt").notNullable().defaultTo(knex.fn.now())
     })

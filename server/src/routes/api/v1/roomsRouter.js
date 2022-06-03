@@ -1,37 +1,25 @@
 import express from "express";
 import objection from "objection";
-const { ValidationError } = objection;
-import { Topic, Room } from "../../../models/index.js"
-import TopicSerializer from "../../../serializers/TopicSerializer.js";
-import cleanUserInput from "../../../services/cleanUserInput.js"
-import { User } from "../../../models/index.js"
+import { Room } from "../../../models/index.js"
 
 const roomsRouter = new express.Router()
 
 roomsRouter.get("/", async (req, res) => {
   try {
-    const topics = await Topic.query()
-    const serializedTopics = topics.map(topics => {
-    return TopicSerializer.getSummary(topics)
-    })
-    return res.status(200).json({ topics: serializedTopics })
+    const rooms = await Room.query()
+    return res.status(200).json({ rooms: rooms })
   } catch (err) {
     return res.status(500).json({ errors: err })
   }
 })
 
 roomsRouter.post("/new", async (req, res) => {
-  const { body } = req
-  const formInput = cleanUserInput(body)
-  const { topicText } = formInput
+  const body = req.body
 
   try {
-    const topic = await Topic.query().insertAndFetch({ topicText })
-    return res.status(201).json({ topic: topic })
+    const room = await Room.query().insertAndFetch( body )
+    return res.status(201).json({ room: room })
   } catch (error) {
-    if (error instanceof ValidationError) {
-      return res.status(422).json({ errors: error.data })
-    }
     return res.status(500).json({ errors: error })
   }
 })

@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 
 const NominationFormTile = (props) => {
   const { memes, makeAMeme } = props
   const [selected, setSelected] = useState()
   const [nomination, setNomination] = useState({
     template_id: 0,
+    name: "",
     text0: "",
     text1: ""
   })
@@ -16,51 +17,49 @@ const NominationFormTile = (props) => {
     })
   }
 
-  const handleClick = (meme) => {
-    // let oldMeme = document.getElementById(selected)
-    // oldMeme.className = "card-selection"
-    // setSelected(meme.key)
-    setNomination({
-      ...nomination,
-      template_id: meme.id
-    })
-
-    // let selectedMeme = document.getElementById(selected)
-    // selectedMeme.className = "card-selection.highlight"
-  }
-  
   const handleOnSubmit = event => {
     event.preventDefault()
-    
     makeAMeme(nomination)
+  }
+  
+  const handleClick = meme => {
+    setNomination({
+      ...nomination,
+      name: meme.name,
+      template_id: meme.id
+    })
   }
 
   const options = memes.map((meme, i) => {
+    const id = i
     return (
       <div 
-        key={i} 
-        id={i}
-        className="card-section"
+        key={id} 
+        id={id}
+        className="meme card-section"
         name={meme.name} 
         template_id={meme.id}
         box_count={meme.box_count}
         onClick={() => handleClick(meme)}
         >
-        <img src={meme.url} alt={meme.name}/>
+        <label htmlFor={meme.name}>
+          <img src={meme.url} alt={meme.name}  />
+        </label>
       </div>
     )
   })
 
   return (
-    <div id="nomination-container" className="cell card small-12 medium-6">
+    <div id="nomination-container" className="cell card small-12 medium-8">
       <form onSubmit={handleOnSubmit}>
         <label>
           <h4 className="card-divider text-center">Choose a meme</h4>
           <div className="memeMap slider" data-slider>
-            <div className="card card-image">{options}</div>
+            <div id="options" className="card card-image">{options}</div>
           </div>
         </label>
         <div>
+          <input type="text" readOnly value={nomination.name}/>
         </div>
           <label htmlFor="message-input" className="cell small-2">Text box 1</label>
             <input 

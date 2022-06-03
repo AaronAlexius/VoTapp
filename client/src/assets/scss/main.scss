@@ -64,6 +64,9 @@
   flex-grow: 1;
 }
 
-.card-selection.highlight {
-  outline: 2em solid #19426B;
+.centerMemeCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
 }

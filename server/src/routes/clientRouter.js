@@ -21,7 +21,6 @@ router.get(clientRoutes, (req, res) => {
 });
 
 router.get(authedClientRoutes, (req, res) => {
-  console.log(req.user)
   if (req.user) {
     res.sendFile(getClientIndexPath());
   } else {
