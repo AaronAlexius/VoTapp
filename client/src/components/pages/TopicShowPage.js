@@ -96,9 +96,6 @@ const TopicShowPage = (props) => {
             </>)
           }
       </div>
-      <div className="centerHeaders">
-        <h3 className="header">Nominations to consider</h3>
-      </div>
       <div className="grid-x grid-margin-x grid-padding-x centerMemeCard">
         <NominationFormTile memes={memes} id={id} makeAMeme={makeAMeme} />
       </div>
