@@ -31,14 +31,16 @@ class Topic extends Model {
           to: "users.id"
         }
       },
+
       room: {
-        relation: Model.BelongsToOneRelation,
+        relation: Model.HasManyRelation,
         modelClass: Room,
         join: {
           from: "topics.id",
           to: "rooms.topicId"
         }
       },
+      
       nomination: {
         relation: Model.HasManyRelation,
         modelClass: Nomination,

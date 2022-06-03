@@ -8,10 +8,10 @@ const clientRoutes = [
   "/user-sessions/new", 
   "/users/new",
   "/users/:id",
+  "/topics/new",
+  "/topics/:id",
   "/rooms", 
-  "/rooms/new",
-  "/rooms/topic",
-  "/rooms/:id"
+  "/rooms/topic"
 ];
 
 const authedClientRoutes = ["/profile"];
@@ -21,7 +21,6 @@ router.get(clientRoutes, (req, res) => {
 });
 
 router.get(authedClientRoutes, (req, res) => {
-  console.log(req.user)
   if (req.user) {
     res.sendFile(getClientIndexPath());
   } else {

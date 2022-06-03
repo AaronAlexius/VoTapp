@@ -4,26 +4,19 @@ import { useParams } from "react-router-dom"
 
 const TopicShowPage = (props) => {
   const [memes, setMemes] = useState([])
+  const { id } = useParams()
   const [currentTopic, setCurrentTopic] = useState({
     topic: "",
-  })
-  const [nominations, setNominations] = useState([])
-  const { id } = useParams()
+  }) 
 
-  const getNominations = async () => {
-    try {
-      const response = await fetch(`api/v1/nominations/${id}`)
-      if (!response.ok) {
-        const errorMessage = `${response.status} (${response.statusText})`
-        const error = new Error(errorMessage)
-        throw (error)
-      }
-      const body = await response.json()
-      setNominations(body.data.nominations)
-    } catch (error) {
-      console.error(`Error in fetch: ${error.message}`)
-    }
-  }
+  const [userMeme, setUserMeme] = useState({
+    id: "", 
+    userId: "",
+    topicId: "",
+    memeUrl: "",
+    numberVotes: null
+  })
+  const [showUserMeme, setShowUserMeme] = useState(false)
 
   const getMemes = async () => {
     try {
@@ -55,41 +48,56 @@ const TopicShowPage = (props) => {
     }
   }
 
+  const makeAMeme = async (nomination) => {
+    try {
+      const response = await fetch(`/api/v1/nominations/${id}`, { 
+        method: 'POST',
+        headers: new Headers({
+          'Content-Type': 'application/json'
+        }),
+        body: JSON.stringify(nomination)
+      })
+      if(!response.ok) {
+        if (response.status === 422) {
+          const body = await response.json()
+          const newErrors = translateServerErrors(body.errors)
+          return setErrors(newErrors)
+        } else {
+          const errorMessage = `${response.status} (${response.statusText})`
+          const error = new Error(errorMessage)
+          throw error
+        }
+      } else {
+        const body = await response.json() 
+        const userMeme = body.meme
+        setUserMeme(userMeme)
+        setShowUserMeme(true)
+      }
+    } catch (error) {
+      console.error(`Error in fetch: ${error.message}`)
+    }
+  }
+
   useEffect(() => {
     getCurrentTopic()
     getMemes()
-    getNominations()
   }, [])
-
-  const memeMap = memes.map(meme => {
-    return (
-      <div key={meme.id} id={meme.id} className="meme">
-        <div>{meme.name}</div>
-        <img src={meme.url} alt={meme.name}/>
-        <hr></hr>
-      </div>
-    )
-  })
-
-  const nominationMap = nominations.map(meme => {
-    <div key={meme.userId} id={meme.userId} className="cell card small-12 medium-3 large-4">
-      <div classname="card-divider">{meme.userId}</div>
-      <img src={meme.memeUrl}/>
-    </div>
-  })
 
   return (
     <div className="grid-container largeContainer">
       <div className="centerHeaders">
-        <h2 className="header">Make a comment on this topic!</h2>
-        <h2 className="header callout text-center primary">{currentTopic.topicText}</h2>
+          {showUserMeme ? (<>
+            <h1>Here is your meme!</h1>
+            <img className="meme" src={userMeme.memeUrl}/>
+            </>)
+          : (<>
+            <h2 className="header">Make a comment on this topic!</h2>
+            <h2 className="header callout text-center primary">{currentTopic.topicText}</h2>
+            </>)
+          }
       </div>
-      <div className="centerHeaders">
-        <h3 className="header">Nominations to consider</h3>
-        {nominationMap}
-      </div>
-      <div className="center-contents">
-        <NominationFormTile memes={memes} id={id}/>
+      <div className="grid-x grid-margin-x grid-padding-x centerMemeCard">
+        <NominationFormTile memes={memes} id={id} makeAMeme={makeAMeme} />
       </div>
     </div>
   )

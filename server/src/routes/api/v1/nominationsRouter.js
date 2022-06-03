@@ -20,6 +20,7 @@ nominationsRouter.post("/:id", async (req, res) => {
   const topicId = req.params.id
   
   try {
+    debugger
     const memeClientResponse = await MemeClient.postMeme(body)
     const nominationObject = {}
     nominationObject.memeUrl = memeClientResponse.data.url
@@ -28,7 +29,6 @@ nominationsRouter.post("/:id", async (req, res) => {
     const persistedMeme = await Nomination.query().insertAndFetch(nominationObject)
     return res.status(200).json({ meme: persistedMeme })
   } catch (error) {
-    console.log(error)
     return res.status(500).json({ errors: error })
   }
 })

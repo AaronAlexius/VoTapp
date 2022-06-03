@@ -23,81 +23,24 @@ class RoomSeeder {
     const prints = await Topic.query().findOne({ topicText: "Printing FOR the printer" })
     
     const roomData = [
-      {
-        userId: roci.id,
-        topicId: cat.id, 
-        roomUrl: "1"
-      },
-      {
-        userId: roci.id,
-        topicId: dnd.id, 
-        roomUrl: "2"
-      },
-      {
-        userId: roci.id,
-        topicId: bond.id, 
-        roomUrl: "3"
-      },
-      {
-        userId: roci.id,
-        topicId: potter.id, 
-        roomUrl: "4"
-      },
-      {
-        userId: roci.id,
-        topicId: coding.id, 
-        roomUrl: "5"
-      },
-      {
-        userId: roci.id,
-        topicId: bostonLife.id, 
-        roomUrl: "6"
-      },
-      {
-        userId: winter.id,
-        topicId: caseMan.id, 
-        roomUrl: "7"
-      },
-      {
-        userId: winter.id,
-        topicId: razor.id, 
-        roomUrl: "8"
-      },
-      {
-        userId: winter.id,
-        topicId: neuro.id, 
-        roomUrl: "9"
-      },
-      {
-        userId: baru.id,
-        topicId: emperor.id, 
-        roomUrl: "9"
-      },
-      {
-        userId: baru.id,
-        topicId: tax.id, 
-        roomUrl: "10"
-      },
-      {
-        userId: ender.id,
-        topicId: runout.id, 
-        roomUrl: "11"
-      },
-      {
-        userId: ender.id,
-        topicId: bed.id, 
-        roomUrl: "12"
-      },
-      {
-        userId: ender.id,
-        topicId: prints.id, 
-        roomUrl: "13"
-      }
+      { userId: roci.id, topicId: cat.id },
+      { userId: roci.id, topicId: dnd.id },
+      { userId: roci.id, topicId: bond.id },
+      { userId: roci.id, topicId: potter.id },
+      { userId: roci.id, topicId: coding.id },
+      { userId: roci.id, topicId: bostonLife.id },
+      { userId: winter.id, topicId: caseMan.id },
+      { userId: winter.id, topicId: razor.id },
+      { userId: winter.id, topicId: neuro.id },
+      { userId: baru.id, topicId: emperor.id },
+      { userId: baru.id, topicId: tax.id },
+      { userId: ender.id, topicId: runout.id },
+      { userId: ender.id, topicId: bed.id },
+      { userId: ender.id, topicId: prints.id }
     ]
 
     for (const roomObject of roomData) {
-      const currentRoom = await Room.query().findOne({ roomUrl: roomObject.roomUrl })
-
+      const currentRoom = await Room.query().findOne(roomObject)
       if (!currentRoom) {
         await Room.query().insert(roomObject)
       }

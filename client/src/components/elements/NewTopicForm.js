@@ -1,10 +1,9 @@
 import React, { useState } from "react"
 
 const NewTopicForm = (props) => {
-  const { postTopic } = props
+  const { postTopic, topicVerified } = props
   const defaultState = { topicText: "" }
   const [voteTopic, setVoteTopic] = useState(defaultState)
-  const { shouldRedirect } = props
   
   const handleInputChange = event => {
     setVoteTopic({
@@ -16,12 +15,7 @@ const NewTopicForm = (props) => {
   const handleOnSubmit = event => {
     event.preventDefault()
     postTopic(voteTopic)
-    clearField()
   }
-
-  const clearField = event => {
-    setVoteTopic(defaultState)
-  } 
 
   return (
     <div className="largeContainer">
@@ -41,11 +35,13 @@ const NewTopicForm = (props) => {
               onChange={handleInputChange}
               />
           </label>
-            <button 
-              type="submit" 
-              id="send-button" 
-              className="cell callout secondary small-1">Save Topic
-            </button>
+            {topicVerified ? "" 
+            : <button 
+                type="submit" 
+                id="send-button" 
+                className="cell callout secondary small-1">Save Topic
+              </button>
+            }
         </form>
       </div>
     </div>
