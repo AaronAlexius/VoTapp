@@ -19,8 +19,5 @@
   "engines": {
     "node": "^14.19.1",
     "yarn": "1.22.10"
-  },
-  "dependencies": {
-  },
-  "version": "v1.22.10"
+  }
 }
