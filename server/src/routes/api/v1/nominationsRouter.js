@@ -20,7 +20,6 @@ nominationsRouter.post("/:id", async (req, res) => {
   const topicId = req.params.id
   
   try {
-    debugger
     const memeClientResponse = await MemeClient.postMeme(body)
     const nominationObject = {}
     nominationObject.memeUrl = memeClientResponse.data.url
