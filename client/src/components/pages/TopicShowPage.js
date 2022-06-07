@@ -89,6 +89,8 @@ const TopicShowPage = (props) => {
           {showUserMeme ? (<>
             <h1>Here is your meme!</h1>
             <img className="meme" src={userMeme.memeUrl}/>
+            <h3>You can share your meme with this link</h3>
+            <h4>{userMeme.memeUrl}</h4>
             </>)
           : (<>
             <h2 className="header">Make a comment on this topic!</h2>
