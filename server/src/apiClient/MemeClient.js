@@ -8,7 +8,7 @@ const password = process.env.IMGFLIP_PASSWORD
 const memeURL = "https://api.imgflip.com/caption_image"
 
 class MemeClient {
-  static async postMeme({ template_id, text0, text1, text2, text3 }) {
+  static async postMeme({ template_id, text0, text1, text2, text3, text4 }) {
     
     const submission = {
       template_id: template_id,
@@ -26,12 +26,14 @@ class MemeClient {
         },
         {
           text: text3
+        },
+        {
+          text: text4
         }
       ]
     }
     
     try {
-      debugger
       const response = await got.post(memeURL, {
         method: 'POST',
         headers: {

@@ -3,11 +3,16 @@ import React, { useState } from "react"
 const NominationFormTile = (props) => {
   const { memes, makeAMeme } = props
   const [selected, setSelected] = useState()
+  const [textBoxArray, setTextBoxArray] = useState([])
   const [nomination, setNomination] = useState({
     template_id: 0,
     name: "",
+    box_count: 0,
     text0: "",
-    text1: ""
+    text1: "",
+    text2: "",
+    text3: "", 
+    text4: ""
   })
 
   const handleInputChange = event => {
@@ -26,7 +31,8 @@ const NominationFormTile = (props) => {
     setNomination({
       ...nomination,
       name: meme.name,
-      template_id: meme.id
+      template_id: meme.id,
+      box_count: meme.box_count
     })
   }
 
@@ -61,24 +67,67 @@ const NominationFormTile = (props) => {
         <div>
           <input type="text" readOnly value={nomination.name}/>
         </div>
-          <label htmlFor="message-input" className="cell small-2">Text box 1</label>
-            <input 
-              type="text" 
-              id="message-input" 
-              className="cell small-8"
-              name="text0"
-              onChange={handleInputChange}
-              value={nomination.text0}
-              ></input>
-          <label htmlFor="message-input" className="cell small-2">Text box 2</label>
-            <input 
-              type="text" 
-              id="message-input" 
-              className="cell small-8"
-              name="text1"
-              onChange={handleInputChange}
-              value={nomination.text1}
-              ></input>
+          {nomination.box_count >= 1 ? (<>
+            <label htmlFor="message-input" className="cell small-2">Text box 1
+              <input 
+                type="text" 
+                id="message-input" 
+                className="cell small-8"
+                name="text0"
+                onChange={handleInputChange}
+                value={nomination.text0}
+                >
+              </input>
+            </label>
+          </>) : ""}
+          {nomination.box_count >= 2 ? (<>
+            <label htmlFor="message-input" className="cell small-2">Text box 2</label>
+              <input 
+                type="text" 
+                id="message-input" 
+                className="cell small-8"
+                name="text1"
+                onChange={handleInputChange}
+                value={nomination.text1}
+                >
+              </input>
+          </>) : ""}
+          {nomination.box_count >= 3 ? (<>
+            <label htmlFor="message-input" className="cell small-2">Text box 3</label>
+              <input 
+                type="text" 
+                id="message-input" 
+                className="cell small-8"
+                name="text2"
+                onChange={handleInputChange}
+                value={nomination.text2}
+                >
+              </input>
+          </>) : ""}
+          {nomination.box_count >= 4 ? (<>
+            <label htmlFor="message-input" className="cell small-2">Text box 4</label>
+              <input 
+                type="text" 
+                id="message-input" 
+                className="cell small-8"
+                name="text3"
+                onChange={handleInputChange}
+                value={nomination.text3}
+                >
+              </input>
+          </>) : ""}
+          {nomination.box_count >= 5 ? (<>
+            <label htmlFor="message-input" className="cell small-2">Text box 5</label>
+              <input 
+                type="text" 
+                id="message-input" 
+                className="cell small-8"
+                name="text4"
+                onChange={handleInputChange}
+                value={nomination.text4}
+                >
+              </input>
+          </>) : ""}
           <button 
             type="submit" 
             id="send-button" 
