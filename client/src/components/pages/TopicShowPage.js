@@ -150,24 +150,7 @@ const TopicShowPage = (props) => {
             <h1>Here is your meme!</h1>
             <img className="meme" src={userMeme.memeUrl}/>
             {bottomButton()}
-            <>
-              {/* <button 
-                type="button" 
-                id="cancelButton" 
-                className="cell callout alert"
-                onClick={handleCancel}
-                >
-                Make a different meme
-              </button>
-              <button
-                type="button" 
-                id="cancelButton" 
-                className="cell callout success"
-                onClick={handleSave}
-                >
-                Save your meme
-              </button> */}
-            </>
+            <>""</>
             </>)
           : (<>
             <h2 className="header">Make a comment on this topic!</h2>
