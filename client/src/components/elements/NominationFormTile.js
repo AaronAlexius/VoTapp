@@ -14,6 +14,16 @@ const NominationFormTile = (props) => {
     text3: "", 
     text4: ""
   })
+  const defaultState = {
+    template_id: 0,
+    name: "",
+    box_count: 0,
+    text0: "",
+    text1: "",
+    text2: "",
+    text3: "", 
+    text4: ""
+  }
 
   const handleInputChange = event => {
     setNomination({

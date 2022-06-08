@@ -5,6 +5,7 @@ import roomsRouter from "./api/v1/roomsRouter.js";
 import nominationsRouter from "./api/v1/nominationsRouter.js";
 import topicsRouter from "./api/v1/topicsRouter.js";
 import clientRouter from "./clientRouter.js";
+import memeRouter from "./api/v1/memeRouter.js";
 
 const rootRouter = new express.Router();
 
@@ -14,6 +15,7 @@ rootRouter.use("/api/v1/user-sessions", userSessionsRouter);
 rootRouter.use("/api/v1/users", usersRouter); 
 rootRouter.use("/api/v1/rooms", roomsRouter);
 rootRouter.use("/api/v1/nominations", nominationsRouter);
-rootRouter.use("/api/v1/topics", topicsRouter)
+rootRouter.use("/api/v1/topics", topicsRouter);
+rootRouter.use("/api/v1/memes", memeRouter)
 
 export default rootRouter;
