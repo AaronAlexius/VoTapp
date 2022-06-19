@@ -1,14 +1,17 @@
 import express from "express";
 import MemeClient from "../../../apiClient/MemeClient.js";
-import { Nomination } from "../../../models/index.js";
+import { Nomination, Topic } from "../../../models/index.js";
 
 const nominationsRouter = new express.Router()
 
-nominationsRouter.get("/:id", async (req, res) => {
+nominationsRouter.get("/:id", async(req, res) => {
+  console.log("req params", req.params)
   const topicId = req.params.id
+
   try {
-    const memes = await Nomination.query().findById(topicId)
-    return res.status(200).json({ memes: memes })
+    const topic = await Topic.query().findById(topicId)
+    const nominations = await topic.$relatedQuery("nomination")
+    return res.status(200).json({ nominations: nominations})
   } catch (error) {
     return res.status(500).json({ errors: error })
   }
@@ -25,7 +28,6 @@ nominationsRouter.post("/:id", async (req, res) => {
     nominationObject.memeUrl = memeClientResponse.data.url
     nominationObject.userId = userId
     nominationObject.topicId = topicId
-    // const persistedMeme = await Nomination.query().insertAndFetch(nominationObject)
     return res.status(200).json({ meme: nominationObject })
   } catch (error) {
     return res.status(500).json({ errors: error })

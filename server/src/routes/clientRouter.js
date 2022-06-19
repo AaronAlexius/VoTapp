@@ -12,7 +12,8 @@ const clientRoutes = [
   "/topics/:id",
   "/rooms", 
   "/rooms/topic",
-  "/topics/:id/nominations"
+  // "/topics/:id/nominations",
+  "/nominations/:id"
 ];
 
 const authedClientRoutes = ["/profile"];

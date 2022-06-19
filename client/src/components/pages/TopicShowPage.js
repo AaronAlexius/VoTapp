@@ -131,7 +131,7 @@ const TopicShowPage = (props) => {
       )
     } else if (showUserMeme && memeSaved) {
       return (
-        <Link type="Link" className="button secondary" to={`/topics/${id}/nominations`}>
+        <Link type="Link" className="button secondary" to={`/nominations/${id}`}>
           Lets share your meme!
         </Link>
       )

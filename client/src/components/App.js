@@ -44,7 +44,7 @@ const App = (props) => {
           <GenerateTopic user={currentUser} />
         </Route>
         <Route exact path="/topics/:id" component={TopicShowPage} />
-        <Route exact path="/topics/:id/nominations" component={NominationShowPage} />
+        <Route exact path="/nominations/:id" component={NominationShowPage} />
       </Switch>
     </Router>
   );
