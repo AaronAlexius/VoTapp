@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import NominationFormTile from "../elements/NominationFormTile";
-import { useParams } from "react-router-dom"
+import { useParams, Link } from "react-router-dom"
 
 const TopicShowPage = (props) => {
   const [memes, setMemes] = useState([])
@@ -17,6 +17,7 @@ const TopicShowPage = (props) => {
     numberVotes: null
   })
   const [showUserMeme, setShowUserMeme] = useState(false)
+  const [memeSaved, setMemeSaved] = useState(false)
 
   const getMemes = async () => {
     try {
@@ -78,6 +79,65 @@ const TopicShowPage = (props) => {
     }
   }
 
+  const handleCancel = () => {
+    setShowUserMeme(false)
+  }
+
+  const handleSave = async () => {
+    try {
+      const response = await fetch(`/api/v1/memes`, {
+        method: 'POST',
+        headers: new Headers({
+          'Content-Type': 'application/json'
+        }),
+        body: JSON.stringify(userMeme)
+      })
+      if(!response.ok) {
+        const errorMessage = `${response.status} (${response.statusText})`
+        const error = new Error(errorMessage)
+        throw error
+      } else {
+        console.log("Meme saved to database")
+        setMemeSaved(true)
+      }
+    } catch (error) {
+      console.error(`Error in fetch: ${error.message}`)
+    }
+  }
+
+  const bottomButton = () => {
+    if (!showUserMeme && !memeSaved) {
+      return ""
+    } else if (showUserMeme && !memeSaved) {
+      return (
+       <div className="grid-x">
+          <button 
+            type="button" 
+            id="cancelButton" 
+            className="cell callout alert"
+            onClick={handleCancel}
+            >
+            Make a different meme
+          </button>
+          <button
+            type="button" 
+            id="cancelButton" 
+            className="cell callout success"
+            onClick={handleSave}
+            >
+            Save your meme
+          </button>
+       </div>
+      )
+    } else if (showUserMeme && memeSaved) {
+      return (
+        <Link type="Link" className="button secondary" to={`/nominations/${id}`}>
+          Lets share your meme!
+        </Link>
+      )
+    } 
+  }
+
   useEffect(() => {
     getCurrentTopic()
     getMemes()
@@ -89,6 +149,8 @@ const TopicShowPage = (props) => {
           {showUserMeme ? (<>
             <h1>Here is your meme!</h1>
             <img className="meme" src={userMeme.memeUrl}/>
+            {bottomButton()}
+            <>""</>
             </>)
           : (<>
             <h2 className="header">Make a comment on this topic!</h2>
